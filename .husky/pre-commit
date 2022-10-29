@@ -1,14 +1,5 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-echo "💅 Formatting code"
-yarn format 
-
-echo "🤓 Linting Code"
-yarn lint
-
-echo "🏗️ Building next" ||
-(
-    echo '❌👷🔨❌ Build failed.'
-    false;
-)
+echo "💅 Linting and Formatting code"
+npx lint-staged

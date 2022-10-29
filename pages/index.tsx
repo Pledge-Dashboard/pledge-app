@@ -1,4 +1,4 @@
-import Head from "next/head";
+import Head from 'next/head';
 
 export default function Home() {
   return (
@@ -9,7 +9,10 @@ export default function Home() {
           name="description"
           content="Liquid Staking Derivates on Polygon PoS"
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="icon"
+          href="/favicon.ico"
+        />
       </Head>
       <main>
         <p>Awesomeness comes here!</p>

@@ -1,6 +1,6 @@
 {
   "arrowParens": "always",
-  "bracketLine": false,
+  "bracketSameLine": false,
   "bracketSpacing": true,
   "endOfLine": "lf",
   "htmlWhitespaceSensitivity": "css",
