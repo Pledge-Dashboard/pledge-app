@@ -22,8 +22,10 @@ const styles = {
       fontSize: '16px',
     },
     body: {
+      fontSize: '16px',
       background: props.theme.colors.bg.main,
       backgroundAttachment: 'fixed',
+      fontFamily: 'Manrope, sans-serif',
     },
   }),
 };
