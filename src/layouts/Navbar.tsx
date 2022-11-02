@@ -9,11 +9,13 @@ export const Navbar = () => {
       position={'fixed'}
       top={0}
       width={'full'}
+      as={'header'}
     >
       <Flex
         h={24}
         alignItems={'center'}
         justifyContent={'space-between'}
+        as={'nav'}
       >
         <Text
           fontSize={['2xl', '2xl', '3xl']}
