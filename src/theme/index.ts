@@ -26,6 +26,7 @@ const styles = {
       background: props.theme.colors.bg.main,
       backgroundAttachment: 'fixed',
       fontFamily: 'Manrope, sans-serif',
+      color: 'white',
     },
   }),
 };
