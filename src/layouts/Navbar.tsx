@@ -13,6 +13,7 @@ export const Navbar = () => {
       position={'fixed'}
       top={0}
       width={'full'}
+      zIndex={999}
     >
       <chakra.nav
         display={'flex'}
