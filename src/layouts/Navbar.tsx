@@ -43,22 +43,28 @@ export const Navbar = () => {
             </Text>
           </Flex>
         </NextLink>
-
         <Spacer />
-        {/* @TODO: Add Links in Here & Hide SideDrawer in mobiles*/}
-        <NavLink
-          href="/#Statistics"
-          displayString="Statistics"
-        />
-        <NavLink
-          href="/#LiquidStaking"
-          displayString="Liquid Staking"
-        />
-        <NavLink
-          href="/#Platforms"
-          displayString="Platforms"
-        />
-        <SideDrawer />
+        <Flex
+          display={{ base: 'none', md: 'flex' }}
+          alignItems={'center'}
+          gap="4"
+        >
+          <NavLink
+            href="/#Statistics"
+            displayString="Statistics"
+          />
+          <NavLink
+            href="/#LiquidStaking"
+            displayString="Liquid Staking"
+          />
+          <NavLink
+            href="/#Platforms"
+            displayString="Platforms"
+          />
+        </Flex>
+        <Box display={{ base: 'block', md: 'none' }}>
+          <SideDrawer />
+        </Box>
       </chakra.nav>
     </chakra.header>
   );
