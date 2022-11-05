@@ -12,6 +12,7 @@ const colors = {
     gradient: 'radial-gradient(106.94% 682.55% at 0% 28.07%, #BE6BFF 16.75%, #FF7878 100%)',
   },
   text: {
+    _default: '#FAFAFA',
     gradient:
       'radial-gradient(106.94% 682.55% at 0% 28.07%, rgba(190, 107, 255, 0.75) 16.75%, rgba(255, 120, 120, 0.75) 100%) #ffffff',
   },
@@ -26,7 +27,7 @@ const styles = {
       background: props.theme.colors.bg.main,
       backgroundAttachment: 'fixed',
       fontFamily: 'Manrope, sans-serif',
-      color: 'white',
+      color: props.theme.colors.text._default,
     },
   }),
 };

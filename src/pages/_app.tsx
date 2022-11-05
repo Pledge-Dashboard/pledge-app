@@ -9,9 +9,37 @@ export default function App({ Component, pageProps }: AppProps) {
       <Navbar />
       <Box
         mt={24}
-        px={{ base: 4, md: 16, lg: 32 }}
+        scrollBehavior="smooth"
       >
-        <Component {...pageProps} />
+        {/* <Component {...pageProps} /> */}
+        <Box
+          h="95vh"
+          id="Landing"
+          as="section"
+          w="full"
+          bg="green.100"
+        />
+        <Box
+          h="95vh"
+          id="Statistics"
+          as="section"
+          w="full"
+          bg="green.200"
+        />
+        <Box
+          h="95vh"
+          id="LiquidStaking"
+          as="section"
+          w="full"
+          bg="green.300"
+        />
+        <Box
+          h="95vh"
+          id="Platforms"
+          as="section"
+          w="full"
+          bg="green.400"
+        />
       </Box>
     </ChakraProvider>
   );
