@@ -12,8 +12,13 @@ const Claystackprice: React.FunctionComponent<IClaystackpriceProps> = (props) =>
   const getData = async () => {
     let Claystackdata = await CoinGeckoClient.coins.fetch('ankr-matic-reward-earning-bond', {});
     let maticdata = await CoinGeckoClient.coins.fetch('matic-network', {});
-    var Claystackprice = Claystackdata.data.market_data.current_price.usd;
-    var maticprice = maticdata.data.market_data.current_price.usd;
+    if (Claystackdata.success === true && maticdata.success === true) {
+      var Claystackprice = Claystackdata.data.market_data.current_price.usd;
+      var maticprice = maticdata.data.market_data.current_price.usd;
+    } else {
+      Claystackprice = 0;
+      maticprice = 0;
+    }
     if (Claystackprice && maticprice) {
       setClaystackp(parseFloat(Claystackprice) / parseFloat(maticprice));
     }

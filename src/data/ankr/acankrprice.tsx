@@ -12,9 +12,15 @@ const Ankrcprice: React.FunctionComponent<IAnkrcpriceProps> = (props) => {
   const getData = async () => {
     let Ankrcdata = await CoinGeckoClient.coins.fetch('ankr-reward-earning-matic', {});
     let maticdata = await CoinGeckoClient.coins.fetch('matic-network', {});
-    var Ankrcprice = Ankrcdata.data.market_data.current_price.usd;
-    var maticprice = maticdata.data.market_data.current_price.usd;
-    if (Ankrcprice && maticprice) {
+    console.log(Ankrcdata);
+    if (Ankrcdata.success === true && maticdata.success === true) {
+      var Ankrcprice = Ankrcdata.data.market_data.current_price.usd;
+      var maticprice = maticdata.data.market_data.current_price.usd;
+    } else {
+      Ankrcprice = 0;
+      maticprice = 0;
+    }
+    if (Ankrcprice != 0 && maticprice != 0) {
       setAnkrcp(parseFloat(Ankrcprice) / parseFloat(maticprice));
     }
     console.log(Ankrcp);

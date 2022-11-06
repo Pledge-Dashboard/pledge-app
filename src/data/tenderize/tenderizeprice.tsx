@@ -12,8 +12,13 @@ const Tenderizeprice: React.FunctionComponent<ITenderizepriceProps> = (props) =>
   const getData = async () => {
     let Tenderizedata = await CoinGeckoClient.coins.fetch('tmatic', {});
     let maticdata = await CoinGeckoClient.coins.fetch('matic-network', {});
-    var Tenderizeprice = Tenderizedata.data.market_data.current_price.usd;
-    var maticprice = maticdata.data.market_data.current_price.usd;
+    if (Tenderizedata.success === true && maticdata.success === true) {
+      var Tenderizeprice = Tenderizedata.data.market_data.current_price.usd;
+      var maticprice = maticdata.data.market_data.current_price.usd;
+    } else {
+      Tenderizeprice = 0;
+      maticprice = 0;
+    }
     if (Tenderizeprice && maticprice) {
       setTenderizep(parseFloat(Tenderizeprice) / parseFloat(maticprice));
     }
