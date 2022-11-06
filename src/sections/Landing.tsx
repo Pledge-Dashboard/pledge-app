@@ -9,8 +9,24 @@ export const Landing = () => {
       w="full"
       alignItems={'center'}
       justifyContent={'center'}
+      flexDir={'column'}
     >
-      <Text>Pledge</Text>
+      <Text
+        fontSize={{ base: '5xl', md: '6xl', lg: '7xl' }}
+        fontWeight={500}
+        bg="bg.gradient"
+        backgroundClip="text"
+        mb={8}
+      >
+        pledge
+      </Text>
+      <Text
+        fontSize={{ base: 'lg', md: '2xl' }}
+        mb={4}
+      >
+        Liquid Staking Derivates on Polygon PoS
+      </Text>
+      <Text fontSize={{ md: 'lg' }}>Adding Security & Flexibility</Text>
     </Flex>
   );
 };
