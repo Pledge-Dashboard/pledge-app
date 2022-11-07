@@ -25,9 +25,10 @@ const styles = {
     body: {
       fontSize: '16px',
       background: props.theme.colors.bg.main,
-      backgroundAttachment: 'fixed',
       fontFamily: 'Manrope, sans-serif',
       color: props.theme.colors.text._default,
+      width: '100vw',
+      overflowX: 'clip',
     },
   }),
 };
