@@ -1,5 +1,6 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex, Spacer, Text } from '@chakra-ui/react';
 import BlurCircle from '../components/BlurCircle';
+import { LandingWidget } from '../components/LandingWidget';
 
 export const Landing = () => {
   return (
@@ -36,7 +37,13 @@ export const Landing = () => {
       >
         Liquid Staking Derivates on Polygon PoS
       </Text>
-      <Text fontSize={{ md: 'lg' }}>Adding Security & Flexibility</Text>
+      <Text
+        fontSize={{ md: 'lg' }}
+        mb={32}
+      >
+        Adding Security & Flexibility
+      </Text>
+      <LandingWidget />
     </Flex>
   );
 };
