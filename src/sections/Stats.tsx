@@ -3,11 +3,12 @@ import { Flex, Text, Tabs, TabList, TabPanels, Tab, TabPanel, Box } from '@chakr
 export const Stats = () => {
   return (
     <Flex
-      h="95vh"
+      minHeight="95vh"
       id="Statistics"
       as="section"
       w="full"
       align={'center'}
+      justify={'center'}
       flexDir={'column'}
       py={8}
     >
@@ -21,12 +22,13 @@ export const Stats = () => {
         stats!
       </Text>
       <Tabs variant="unstyled">
-        <TabList gap={12}>
+        <TabList gap={{ base: 4, md: 8, lg: 12 }}>
           {['Stader', 'Lido', 'Claystack', 'Ankr', 'Tenderize'].map((tab, index) => (
             <Tab
               _selected={{ color: 'white', bg: '#D9D9D91A' }}
               borderRadius="12"
-              px={6}
+              px={{ base: 2, md: 8 }}
+              fontSize={{ base: 'sm', md: 'lg', lg: 'xl' }}
               key={index}
             >
               {tab}
@@ -45,6 +47,7 @@ export const Stats = () => {
                 py={8}
                 px={8}
                 justifyContent={'space-between'}
+                flexDir={{ base: 'column', md: 'row' }}
               >
                 <Flex
                   flexDir={'column'}
