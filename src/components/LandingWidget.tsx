@@ -5,40 +5,40 @@ export const LandingWidget = () => {
     <Flex
       borderBottom={'1px solid bg.gradient'}
       justifyContent={'center'}
-      gap={32}
+      gap={{ base: 8, md: 32 }}
     >
       <Box textAlign={'center'}>
         <Text
-          fontSize={'2xl'}
+          fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}
           fontWeight={500}
           bg="bg.gradient"
           backgroundClip="text"
         >
           21.34M
         </Text>
-        <Text>Stacked</Text>
+        <Text fontSize={{ base: 'sm', md: 'lg', lg: 'xl' }}>Stacked</Text>
       </Box>
       <Box textAlign={'center'}>
         <Text
-          fontSize={'2xl'}
+          fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}
           fontWeight={500}
           bg="bg.gradient"
           backgroundClip="text"
         >
           5+
         </Text>
-        <Text>Derivative Platforms</Text>
+        <Text fontSize={{ base: 'sm', md: 'lg', lg: 'xl' }}>Derivative Platforms</Text>
       </Box>
       <Box textAlign={'center'}>
         <Text
-          fontSize={'2xl'}
+          fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}
           fontWeight={500}
           bg="bg.gradient"
           backgroundClip="text"
         >
           21%
         </Text>
-        <Text>Average APY</Text>
+        <Text fontSize={{ base: 'sm', md: 'lg', lg: 'xl' }}>Average APY</Text>
       </Box>
     </Flex>
   );
