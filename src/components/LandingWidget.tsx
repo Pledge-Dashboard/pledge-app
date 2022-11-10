@@ -4,8 +4,10 @@ export const LandingWidget = () => {
   return (
     <Flex
       borderBottom={'1px solid bg.gradient'}
-      justifyContent={'center'}
-      gap={{ base: 8, md: 32 }}
+      width={'full'}
+      justifyContent={'space-between'}
+      maxWidth={'600px'}
+      px={4}
     >
       <Box textAlign={'center'}>
         <Text
