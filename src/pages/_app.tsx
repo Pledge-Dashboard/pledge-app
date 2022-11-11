@@ -9,6 +9,7 @@ import Ankrcprice from '../data/ankr/acankrprice';
 import Tenderizeprice from '../data/tenderize/tenderizeprice';
 import { Landing } from '../sections/Landing';
 import { Stats } from '../sections/Stats';
+import { Here } from '../sections/Here';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -17,26 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
       {/* <Component {...pageProps} /> */}
       <Landing />
       <Stats />
-      <Box
-        h="95vh"
-        id="LiquidStaking"
-        as="section"
-        w="full"
-        bg="green.300"
-      >
-        <Lidoprice />
-        <Staderprice />
-        <Ankrbprice />
-        <Ankrcprice />
-        <Tenderizeprice />
-      </Box>
-      <Box
-        h="95vh"
-        id="Platforms"
-        as="section"
-        w="full"
-        bg="green.400"
-      />
+      <Here />
     </ChakraProvider>
   );
 }
