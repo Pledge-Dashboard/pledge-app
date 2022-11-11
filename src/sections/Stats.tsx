@@ -8,7 +8,6 @@ export const Stats = () => {
       as="section"
       w="full"
       align={'center'}
-      justify={'center'}
       flexDir={'column'}
       py={8}
     >
@@ -22,7 +21,7 @@ export const Stats = () => {
         stats!
       </Text>
       <Tabs variant="unstyled">
-        <TabList gap={{ base: 4, md: 8, lg: 12 }}>
+        <TabList gap={{ base: 4, md: 8 }}>
           {['Stader', 'Lido', 'Claystack', 'Ankr', 'Tenderize'].map((tab, index) => (
             <Tab
               _selected={{ color: 'white', bg: '#D9D9D91A' }}
