@@ -1,5 +1,6 @@
 import { SectionContainer } from '../layouts/SectionContainer';
-import { Text, Grid, GridItem } from '@chakra-ui/react';
+import { Avatar, Text, Grid, GridItem } from '@chakra-ui/react';
+import { dummyData } from '../data/dummy';
 
 export const Here = () => {
   return (
@@ -14,7 +15,6 @@ export const Here = () => {
         >
           Stake your MATIC
         </Text>
-        {/*Create a responsive grid with fixed width cards*/}
         <Grid
           mt={12}
           templateColumns={{
@@ -24,36 +24,19 @@ export const Here = () => {
           }}
           gap={12}
         >
-          <GridItem
-            w="16rem"
-            h="12rem"
-            bg="bg.translucent"
-            borderRadius="xl"
-          />
-          <GridItem
-            w="16rem"
-            h="12rem"
-            bg="bg.translucent"
-            borderRadius="xl"
-          />
-          <GridItem
-            w="16rem"
-            h="12rem"
-            bg="bg.translucent"
-            borderRadius="xl"
-          />
-          <GridItem
-            w="16rem"
-            h="12rem"
-            bg="bg.translucent"
-            borderRadius="xl"
-          />
-          <GridItem
-            w="16rem"
-            h="12rem"
-            bg="bg.translucent"
-            borderRadius="xl"
-          />
+          {dummyData.derivatives.map((item, index) => (
+            <GridItem
+              key={index}
+              w="16rem"
+              h="12rem"
+              bg="bg.translucent"
+              borderRadius="xl"
+              p={4}
+              textAlign="center"
+            >
+              <Text fontSize={{ base: 'md', md: 'lg' }}>{item}</Text>
+            </GridItem>
+          ))}
         </Grid>
       </>
     </SectionContainer>
