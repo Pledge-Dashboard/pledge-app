@@ -1,4 +1,8 @@
 import Head from 'next/head';
+import { Landing } from '../sections/Landing';
+import { Stats } from '../sections/Stats';
+import { Here } from '../sections/Here';
+import { What } from '../sections/What';
 
 export default function Home() {
   return (
@@ -15,7 +19,10 @@ export default function Home() {
         />
       </Head>
       <main>
-        <p>Awesomeness comes here!</p>
+        <Landing />
+        <Stats />
+        <What />
+        <Here />
       </main>
     </div>
   );
