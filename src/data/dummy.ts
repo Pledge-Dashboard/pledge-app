@@ -1,6 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-
-const data = {
+export const dummyData = {
   totalStacked: '21.5 M',
   totalDerivatives: '5',
   averageAPY: '12.5%',
@@ -64,8 +62,4 @@ const data = {
       },
     },
   },
-};
-
-export const handler = (_req: NextApiRequest, _res: NextApiResponse) => {
-  _res.status(200).json(data);
 };
