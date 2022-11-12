@@ -29,11 +29,11 @@ export default async function handler(request: NextApiRequest, response: NextApi
     lidoData = {
       priceMatic: 1 / price, // price of stMATIC token in MATIC
       price, // price of MATIC token in stMATIC
-      apr,
-      stakers,
+      apr: apr.toString(),
+      stakers: stakers.toString(),
       totalStaked: {
-        matic: totalStaked.token,
-        usd: totalStaked.usd,
+        matic: totalStaked.token.toString(),
+        usd: totalStaked.usd.toString(),
       }, // total staked MATIC in Lido
     };
   }
@@ -47,10 +47,10 @@ export default async function handler(request: NextApiRequest, response: NextApi
     staderData = {
       price: polygon.exchangeRate, // price of stMATIC token in MATIC
       priceMatic: 1 / polygon.exchangeRate, // price of MATIC token in stMATIC
-      apy: polygon?.apy || '5.76',
+      apy: polygon?.apy?.toString() || '5.76',
       totalStaked: {
-        matic: polygon.native,
-        usd: polygon.usd,
+        matic: polygon.native.toString(),
+        usd: polygon.usd.toString(),
       }, // total staked MATIC in Stader
     };
   }
@@ -70,11 +70,11 @@ export default async function handler(request: NextApiRequest, response: NextApi
     ankrData = {
       priceMatic: currentPriceUSD / currentMaticPriceUSD, // price of ANKR token in MATIC
       price: currentMaticPriceUSD / currentPriceUSD, // price of MATIC token in ANKR
-      apy: polygonData.apy,
-      stakers: polygonData.stakers,
+      apy: polygonData.apy.toString(),
+      stakers: polygonData.stakers.toString(),
       totalStaked: {
-        matic: polygonData.totalStaked,
-        usd: polygonData.totalStakedUsd,
+        matic: polygonData.totalStaked.toString(),
+        usd: polygonData.totalStakedUsd.toString(),
       },
     };
   }
@@ -104,10 +104,10 @@ export default async function handler(request: NextApiRequest, response: NextApi
     tenderizeData = {
       priceMatic: currentPriceUSD / currentMaticPriceUSD, // price of TMATIC token in MATIC
       price: currentMaticPriceUSD / currentPriceUSD, // price of MATIC token in TMATIC
-      apy,
+      apy: apy.toString(),
       totalStaked: {
-        usd: tvl,
-        matic: tvl / currentMaticPriceUSD,
+        usd: tvl.toString(),
+        matic: (tvl / currentMaticPriceUSD).toString(),
       },
     };
   }
