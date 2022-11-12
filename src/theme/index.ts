@@ -10,6 +10,7 @@ const colors = {
   bg: {
     main: '#151A2D',
     gradient: 'radial-gradient(106.94% 682.55% at 0% 28.07%, #BE6BFF 16.75%, #FF7878 100%)',
+    translucent: '#D9D9D91A',
   },
   text: {
     _default: '#FAFAFA',

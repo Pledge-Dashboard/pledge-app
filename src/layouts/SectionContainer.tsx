@@ -16,14 +16,13 @@ export const SectionContainer = ({ id, title, children }: Props) => {
       w="full"
       align={'center'}
       flexDir={'column'}
-      py={8}
+      pt={16}
     >
       <Text
         fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
         fontWeight={500}
         bg="bg.gradient"
         backgroundClip="text"
-        mb={12}
       >
         {title}
       </Text>
