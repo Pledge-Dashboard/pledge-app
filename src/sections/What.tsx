@@ -1,10 +1,10 @@
 import { SectionContainer } from '../layouts/SectionContainer';
 
-export const Here = () => {
+export const What = () => {
   return (
     <SectionContainer
-      id="here"
-      title="here!"
+      id="what"
+      title="what?"
     >
       <></>
     </SectionContainer>

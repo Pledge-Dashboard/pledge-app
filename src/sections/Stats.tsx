@@ -1,25 +1,12 @@
-import { Flex, Text, Tabs, TabList, TabPanels, Tab, TabPanel, Box } from '@chakra-ui/react';
+import { Flex, Tabs, TabList, TabPanels, Tab, TabPanel, Box } from '@chakra-ui/react';
+import { SectionContainer } from '../layouts/SectionContainer';
 
 export const Stats = () => {
   return (
-    <Flex
-      minHeight="95vh"
-      id="Statistics"
-      as="section"
-      w="full"
-      align={'center'}
-      flexDir={'column'}
-      py={8}
+    <SectionContainer
+      id="statistics"
+      title="stats!"
     >
-      <Text
-        fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
-        fontWeight={500}
-        bg="bg.gradient"
-        backgroundClip="text"
-        mb={12}
-      >
-        stats!
-      </Text>
       <Tabs variant="unstyled">
         <TabList gap={{ base: 4, md: 8 }}>
           {['Stader', 'Lido', 'Claystack', 'Ankr', 'Tenderize'].map((tab, index) => (
@@ -86,6 +73,6 @@ export const Stats = () => {
           ))}
         </TabPanels>
       </Tabs>
-    </Flex>
+    </SectionContainer>
   );
 };
