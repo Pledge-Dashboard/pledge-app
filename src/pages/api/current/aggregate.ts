@@ -1,3 +1,4 @@
+import { Db } from 'mongodb';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { connectToDatabase } from '../../../../lib/mongodb';
 
@@ -111,11 +112,23 @@ export default async function handler(request: NextApiRequest, response: NextApi
     };
   }
 
-  response.status(200).json({
+  const result = {
     lido: lidoData,
     stader: staderData,
     ankr: ankrData,
     claystack: claystackData,
     tenderize: tenderizeData,
-  });
+    timestamp: new Date().toISOString(),
+  };
+
+  const { database }: { database: Db } = await connectToDatabase();
+  const collection = database.collection(process.env.NEXT_ATLAS_COLLECTION || '');
+
+  try {
+    await collection.insertOne(result);
+    response.setHeader('Cache-Control', 's-maxage=300');
+    response.status(200).json(result);
+  } catch (error) {
+    response.status(500).json({ error: error?.message });
+  }
 }
