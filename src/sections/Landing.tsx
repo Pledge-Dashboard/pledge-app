@@ -6,7 +6,7 @@ import { LandingWidget } from '../components/LandingWidget';
 export const Landing = () => {
   useEffect(() => {
     (async () => {
-      const results = await fetch('/api/current/aggregate').then((response) => response.json());
+      const results = await fetch('/api/current/').then((response) => response.json());
       console.log(results);
     })();
   }, []);
