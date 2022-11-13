@@ -59,7 +59,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
   {
     const ANKR_API_URI = 'https://api.staking.ankr.com/v1alpha/metrics';
     const ankrApiRes = await (await fetch(ANKR_API_URI)).json();
-    const polygonData = ankrApiRes.services.find((service) => service.serviceName === 'polygon');
+    const polygonData = ankrApiRes.services.find((service: any) => service.serviceName === 'polygon');
 
     const {
       market_data: {
@@ -129,6 +129,6 @@ export default async function handler(request: NextApiRequest, response: NextApi
     response.setHeader('Cache-Control', 's-maxage=300');
     response.status(200).json(result);
   } catch (error) {
-    response.status(500).json({ error: error?.message });
+    response.status(500).json({ error: error });
   }
 }
