@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 export const NavLink = ({ href, displayString }: { href: string; displayString: string }) => {
   const router = useRouter();
-  const isActive = router.asPath == href ? true : false;
+  // const isActive = router.asPath == href ? true : false;
 
   const [width, setWidth] = useState('0');
 

@@ -80,8 +80,8 @@ export default async function handler(request: NextApiRequest, response: NextApi
   }
 
   //   CLAYSTACK DATA SYNC
-  {
-  }
+  // {
+  // }
 
   //   Tenderize Data Sync
   {

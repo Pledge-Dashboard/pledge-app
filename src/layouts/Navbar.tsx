@@ -6,8 +6,8 @@ import { SideDrawer } from './SideDrawer';
 export const Navbar = () => {
   return (
     <chakra.header
-      bg={'bg.main'}
-      position={'fixed'}
+      // bg={'bg.main'}
+      position={'sticky'}
       px={{ base: 4, md: 16, lg: 16 }}
       py={4}
       top={0}
