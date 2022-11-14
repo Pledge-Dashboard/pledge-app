@@ -5,11 +5,14 @@ import { useRouter } from 'next/router';
 
 export const NavLink = ({ href, displayString }: { href: string; displayString: string }) => {
   const router = useRouter();
-  // const isActive = router.asPath == href ? true : false;
 
   const [width, setWidth] = useState('0');
+  const [active, setActive] = useState(false);
 
-  useEffect(() => setWidth(router.asPath == href ? '3ch' : '0'), [href, router]);
+  useEffect(() => {
+    setActive(router.asPath === href ? true : false);
+    setWidth(router.asPath === href ? '3ch' : '0');
+  }, [href, router]);
 
   return (
     <NextLink
@@ -19,6 +22,10 @@ export const NavLink = ({ href, displayString }: { href: string; displayString: 
       scroll={false}
     >
       <Link
+        textAlign={'right'}
+        fontWeight={active ? '600' : '500'}
+        fontSize="18"
+        position={'relative'}
         _hover={{
           _after: {
             width: width !== '0' ? '3ch' : '1.5ch',
@@ -26,6 +33,8 @@ export const NavLink = ({ href, displayString }: { href: string; displayString: 
         }}
         _after={{
           content: '""',
+          position: 'absolute',
+          right: '0',
           width: width,
           height: '2px',
           display: 'block',
