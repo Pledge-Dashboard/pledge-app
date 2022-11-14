@@ -25,7 +25,9 @@ const styles = {
     },
     body: {
       fontSize: '16px',
-      background: props.theme.colors.bg.main,
+      background: props.theme.colors.bg.gradient,
+      backgroundColor: props.theme.colors.bg.main,
+      backgroundBlendMode: 'overlay',
       fontFamily: 'Manrope, sans-serif',
       color: props.theme.colors.text._default,
       width: '100vw',

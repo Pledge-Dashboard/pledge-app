@@ -22,12 +22,14 @@ export const Landing = () => {
     >
       <BlurCircle
         blur={80}
-        w="96"
+        w="75%"
+        pt="75%"
         opacity={1}
         position="absolute"
+        mixBlendMode={'color'}
         top="0"
         right="0"
-        transform="translate(25%, -50%)"
+        transform="translate(25%, -25%)"
         // display={{ base: 'none', lg: 'block' }}
       />
       <Text

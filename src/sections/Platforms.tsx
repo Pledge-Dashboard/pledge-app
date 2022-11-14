@@ -1,11 +1,11 @@
 import { SectionContainer } from '../layouts/SectionContainer';
-import { Avatar, Text, Grid, GridItem } from '@chakra-ui/react';
+import { Text, Grid, GridItem } from '@chakra-ui/react';
 import { PLATFORMS } from '../context/DataStore';
 
 const Platforms = () => {
   return (
     <SectionContainer
-      id="here"
+      id="platforms"
       title="here!"
     >
       <>
