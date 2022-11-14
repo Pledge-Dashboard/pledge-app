@@ -21,7 +21,7 @@ export const Landing = () => {
       flexDir={'column'}
     >
       <BlurCircle
-        blur={80}
+        blur={100}
         w="75%"
         pt="75%"
         opacity={1}
@@ -29,7 +29,7 @@ export const Landing = () => {
         mixBlendMode={'color'}
         top="0"
         right="0"
-        transform="translate(25%, -25%)"
+        transform="translate(50%, -60%)"
         // display={{ base: 'none', lg: 'block' }}
       />
       <Text
