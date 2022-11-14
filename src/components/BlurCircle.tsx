@@ -1,9 +1,8 @@
 import { Box, ChakraComponent } from '@chakra-ui/react';
-import React from 'react';
+import { FC } from 'react';
 
-const BlurCircle: ChakraComponent<
-  'div',
-  {
+const BlurCircle: FC<
+  ChakraComponent<'div'> & {
     blur: number;
     opacity?: string;
     width?: string;
