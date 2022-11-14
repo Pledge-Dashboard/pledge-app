@@ -6,8 +6,7 @@ import { SideDrawer } from './SideDrawer';
 export const Navbar = () => {
   return (
     <chakra.header
-      // bg={'bg.main'}
-      position={'sticky'}
+      position={'fixed'}
       px={{ base: 4, md: 16, lg: 16 }}
       py={4}
       top={0}
@@ -43,7 +42,9 @@ export const Navbar = () => {
             </Text>
           </Flex>
         </NextLink>
+
         <Spacer />
+
         <Flex
           display={{ base: 'none', md: 'flex' }}
           alignItems={'center'}

@@ -22,6 +22,7 @@ const styles = {
   global: (props: StyleFunctionProps) => ({
     html: {
       fontSize: '16px',
+      overflowX: 'hidden',
     },
     body: {
       fontSize: '16px',
@@ -31,7 +32,7 @@ const styles = {
       fontFamily: 'Manrope, sans-serif',
       color: props.theme.colors.text._default,
       width: '100vw',
-      overflowX: 'clip',
+      overflowX: 'hidden',
     },
   }),
 };

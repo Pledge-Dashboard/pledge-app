@@ -1,10 +1,10 @@
-import { JSXElementConstructor, ReactComponentElement } from 'react';
+import { ReactNode } from 'react';
 import { Flex, Text } from '@chakra-ui/react';
 
 interface Props {
   id: string;
   title: string;
-  children: ReactComponentElement<any, any> | JSXElementConstructor<any>;
+  children: ReactNode;
 }
 
 export const SectionContainer = ({ id, title, children }: Props) => {
