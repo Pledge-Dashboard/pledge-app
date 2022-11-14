@@ -12,6 +12,9 @@ export const Navbar = () => {
       top={0}
       width={'full'}
       zIndex={999}
+      backdropFilter={'auto'}
+      backdropBlur={'md'}
+      bg={'bg.translucent'}
     >
       <chakra.nav
         display={'flex'}
