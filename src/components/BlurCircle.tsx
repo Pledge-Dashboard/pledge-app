@@ -1,13 +1,7 @@
-import { Box, ChakraComponent } from '@chakra-ui/react';
+import { Box, ChakraProps } from '@chakra-ui/react';
 import { FC } from 'react';
 
-const BlurCircle: FC<
-  ChakraComponent<'div'> & {
-    blur: number;
-    opacity?: string;
-    width?: string;
-  }
-> = ({ blur, opacity = '0.25', width = '96', ...props }) => {
+const BlurCircle: FC<ChakraProps> = ({ blur, opacity = '0.25', width = '96', ...props }) => {
   return (
     <Box
       width={width}
@@ -17,6 +11,7 @@ const BlurCircle: FC<
       borderRadius="50%"
       bg="bg.gradient"
       zIndex={-1}
+      mixBlendMode="color"
       {...props}
     />
   );
