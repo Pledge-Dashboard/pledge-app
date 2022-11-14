@@ -1,6 +1,6 @@
 import { SectionContainer } from '../layouts/SectionContainer';
 import { Avatar, Text, Grid, GridItem } from '@chakra-ui/react';
-import { dummyData } from '../data/dummy';
+import { PLATFORMS } from '../context/DataStore';
 
 const Platforms = () => {
   return (
@@ -24,7 +24,7 @@ const Platforms = () => {
           }}
           gap={12}
         >
-          {dummyData.derivatives.map((item, index) => (
+          {Object.keys(PLATFORMS).map((item, index) => (
             <GridItem
               key={index}
               w="16rem"
