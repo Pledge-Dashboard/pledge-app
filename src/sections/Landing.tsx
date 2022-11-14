@@ -1,15 +1,8 @@
 import { Flex, Text } from '@chakra-ui/react';
-import { useEffect } from 'react';
 import BlurCircle from '../components/BlurCircle';
 import { LandingWidget } from '../components/LandingWidget';
 
 export const Landing = () => {
-  useEffect(() => {
-    (async () => {
-      const results = await fetch('/api/current/').then((response) => response.json());
-      console.log(results);
-    })();
-  }, []);
   return (
     <Flex
       h="100vh"

@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { Landing } from '../sections/Landing';
 import { Stats } from '../sections/Stats';
-import { Here } from '../sections/Here';
-import { What } from '../sections/What';
+import Platforms from '../sections/Platforms';
+import LiquidStakingInfo from '../sections/LiquidStakingInfo';
 
 export default function Home() {
   return (
@@ -21,8 +21,8 @@ export default function Home() {
       <main>
         <Landing />
         <Stats />
-        <What />
-        <Here />
+        <LiquidStakingInfo />
+        <Platforms />
       </main>
     </div>
   );

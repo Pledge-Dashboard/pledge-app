@@ -2,7 +2,7 @@ import { SectionContainer } from '../layouts/SectionContainer';
 import { Avatar, Text, Grid, GridItem } from '@chakra-ui/react';
 import { dummyData } from '../data/dummy';
 
-export const Here = () => {
+const Platforms = () => {
   return (
     <SectionContainer
       id="here"
@@ -42,3 +42,5 @@ export const Here = () => {
     </SectionContainer>
   );
 };
+
+export default Platforms;

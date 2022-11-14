@@ -1,12 +1,14 @@
 import { SectionContainer } from '../layouts/SectionContainer';
 
-export const What = () => {
+export const LiquidStakingInfo = () => {
   return (
     <SectionContainer
-      id="what"
+      id="LiquidStaking"
       title="what?"
     >
       <></>
     </SectionContainer>
   );
 };
+
+export default LiquidStakingInfo;
