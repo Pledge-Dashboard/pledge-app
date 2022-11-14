@@ -17,6 +17,7 @@ export const SectionContainer = ({ id, title, children }: Props) => {
       align={'center'}
       flexDir={'column'}
       pt={16}
+      scrollMarginTop={16}
     >
       <Text
         fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
