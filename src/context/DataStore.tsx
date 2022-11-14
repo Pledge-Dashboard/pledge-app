@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { createContext, FunctionComponent, PropsWithChildren, useEffect, useState } from 'react';
+import { createContext, FunctionComponent, PropsWithChildren, useEffect, useMemo, useState } from 'react';
 
-export enum Platforms {
+export enum PLATFORMS {
   LIDO = 'lido',
   ANKR = 'ankr',
   STADER = 'stader',
@@ -11,11 +11,11 @@ export enum Platforms {
 
 // values of platforms enum
 export type PlatformNames =
-  | Platforms.LIDO
-  | Platforms.ANKR
-  | Platforms.STADER
-  | Platforms.CLAYSTACK
-  | Platforms.TENDERIZE;
+  | PLATFORMS.LIDO
+  | PLATFORMS.ANKR
+  | PLATFORMS.STADER
+  | PLATFORMS.CLAYSTACK
+  | PLATFORMS.TENDERIZE;
 
 export type PlatformData = {
   priceMatic: number;
@@ -28,7 +28,7 @@ export type PlatformData = {
   };
 };
 export type Data = {
-  [key in Platforms]?: PlatformData;
+  [key in PLATFORMS]?: PlatformData;
 };
 export interface DataSnapshot extends Data {
   _id: string;
@@ -36,7 +36,7 @@ export interface DataSnapshot extends Data {
 }
 
 export type HistoryByPlatform = {
-  [key in Platforms]?: Array<DataSnapshot | undefined> | undefined;
+  [key in PLATFORMS]: Array<DataSnapshot | undefined>;
 };
 
 export type DataStore = {
@@ -44,6 +44,7 @@ export type DataStore = {
   setCurrent: (current: DataSnapshot) => void;
   historical: Array<DataSnapshot> | undefined;
   setHistorical: (historical: Array<DataSnapshot>) => void;
+  historyByPlatform: HistoryByPlatform;
 };
 
 const DataStoreContext = createContext<DataStore | null>({
@@ -59,6 +60,13 @@ const DataStoreContext = createContext<DataStore | null>({
   setCurrent: () => {},
   historical: [],
   setHistorical: () => {},
+  historyByPlatform: {
+    lido: [],
+    ankr: [],
+    stader: [],
+    claystack: [],
+    tenderize: [],
+  },
 });
 
 // const DataStoreProvider = DataStoreContext.Provider;
@@ -76,23 +84,29 @@ const DataStoreProvider: FunctionComponent<PropsWithChildren> = ({ children }) =
     })();
   }, []);
 
-  const historyByPlatform = historical?.reduce<HistoryByPlatform>(
-    (acc, current) => {
-      const { _id, timestamp, ...platforms } = current;
-
-      Object.keys(platforms).forEach((platform) => {
-        acc[platform].push({ _id, timestamp, ...platforms[platform] });
-      });
-      return acc;
-    },
-    {
+  const historyByPlatform = useMemo<HistoryByPlatform>(() => {
+    const defaultHistoryByPlatform: HistoryByPlatform = {
       lido: [],
       ankr: [],
       stader: [],
       claystack: [],
       tenderize: [],
-    }
-  );
+    };
+
+    historical?.reduce<HistoryByPlatform>((acc, current) => {
+      const { _id, timestamp, ...platformsData } = current;
+
+      const platforms = Object.keys(platformsData) as PlatformNames[];
+
+      platforms.forEach((platform: PlatformNames) => {
+        acc[platform].push({ _id, timestamp, ...platformsData[platform] });
+      });
+
+      return acc;
+    }, defaultHistoryByPlatform);
+
+    return defaultHistoryByPlatform;
+  }, [historical]);
 
   return (
     <DataStoreContext.Provider
@@ -101,6 +115,7 @@ const DataStoreProvider: FunctionComponent<PropsWithChildren> = ({ children }) =
         setCurrent: setCurrent,
         historical: historical,
         setHistorical: setHistorical,
+        historyByPlatform,
       }}
     >
       {children}
