@@ -1,5 +1,6 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
 import { StakeInfoCard } from '../components/StakeInfoCard';
+import BlurCircle from '../components/BlurCircle';
 
 export const LiquidStakingInfo = () => {
   return (
@@ -26,7 +27,19 @@ export const LiquidStakingInfo = () => {
       >
         Understand Liquid Staking
       </Text>
-      <Flex justifyContent={{ base: 'center', md: 'flex-start' }}>
+      <Flex
+        justifyContent={{ base: 'center', md: 'flex-start' }}
+        position={'relative'}
+      >
+        <BlurCircle
+          blur={100}
+          opacity={1}
+          position="absolute"
+          mixBlendMode={'color-dodge'}
+          left={0}
+          transform="translate(-40%, -4rem)"
+          w={{ base: '12rem', md: '24rem' }}
+        />
         <StakeInfoCard
           title="Staking?"
           description="Stake MATIC with validators and participate in growth of the network!"
@@ -35,7 +48,19 @@ export const LiquidStakingInfo = () => {
           alignment="flex-end"
         />
       </Flex>
-      <Flex justifyContent={{ base: 'center', md: 'flex-end' }}>
+      <Flex
+        justifyContent={{ base: 'center', md: 'flex-end' }}
+        position={'relative'}
+      >
+        <BlurCircle
+          blur={100}
+          opacity={1}
+          position="absolute"
+          mixBlendMode={'color-dodge'}
+          right={0}
+          transform="translate(30%, 6rem)"
+          h={{ base: '12rem', md: '12rem' }}
+        />
         <StakeInfoCard
           title="Returns!"
           description="Get returns for staked MATIC!! Current Avg. APY: __%"
