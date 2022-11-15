@@ -115,7 +115,8 @@ const GenericChart: React.FC = () => {
   const HEIGHT = 400;
   const WIDTH = 600;
 
-  const [chartCreated, setChartCreated] = useState<IChartApi | undefined>(undefined);
+  const [chart, setChart] = useState<IChartApi | undefined>(undefined);
+  const [chartCreated, setChartCreated] = useState<boolean>(false);
   const formattedData = useMemo(
     () =>
       data.map((entry) => {
@@ -134,7 +135,8 @@ const GenericChart: React.FC = () => {
 
   // if no chart created yet, create one with options and add to DOM manually
   useEffect(() => {
-    if (!chartCreated && formattedData) {
+    if (!chartCreated && formattedData.length > 0) {
+      setChartCreated(true);
       const chart = createChart(ref.current ? ref.current : '', {
         width: WIDTH,
         height: HEIGHT,
@@ -176,10 +178,6 @@ const GenericChart: React.FC = () => {
         lineColor: '#ff007a',
         lineWidth: 3,
       });
-
-      //   @ts-ignore
-      series.setData(formattedData);
-
       // update the title when hovering on the chart
       chart.subscribeCrosshairMove(function (param) {
         if (
@@ -193,21 +191,23 @@ const GenericChart: React.FC = () => {
           setValue(price);
         }
       });
-
       chart.timeScale().fitContent();
-
-      setChartCreated(chart);
+      if (formattedData.length > 0) {
+        //@ts-ignore
+        series.setData(formattedData);
+      }
+      setChart(chart);
     } else if (chartCreated && !formattedData) {
       if (ref.current) ref.current.innerHTML = '';
-      setChartCreated(undefined);
+      setChartCreated(false);
     }
-  }, []);
+  }, [formattedData]);
 
   // responsiveness
   useEffect(() => {
     if (WIDTH) {
-      chartCreated && chartCreated.resize(WIDTH, HEIGHT);
-      chartCreated && chartCreated.timeScale().scrollToPosition(0, true);
+      chart && chart.resize(WIDTH, HEIGHT);
+      chart && chart.timeScale().scrollToPosition(0, true);
     }
   }, [chartCreated, WIDTH, HEIGHT]);
 
@@ -219,7 +219,7 @@ const GenericChart: React.FC = () => {
           <Text>{/* <span>{graphTimePeriod}</span> */}</Text>
         </Box>
       </Box>
-      {data && (
+      {formattedData && (
         <>
           <Box
             ref={ref}
