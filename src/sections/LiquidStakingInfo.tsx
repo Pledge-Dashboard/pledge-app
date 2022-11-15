@@ -25,20 +25,18 @@ export const LiquidStakingInfo = () => {
       >
         Understand Liquid Staking
       </Text>
-      <Flex
-        justifyContent={{ base: 'center', md: 'flex-start' }}
-        mb={{ base: 8, md: 12, lg: 0 }}
-        minH={'12rem'}
-      >
+      <Flex justifyContent={{ base: 'center', md: 'flex-start' }}>
         <Flex
           bgColor={'bg.translucent'}
           textAlign={{ base: 'center', md: 'left' }}
           flexDirection={'column'}
           alignItems={'flex-end'}
-          w={{ base: 'full', md: '75%', lg: '50%' }}
+          w={{ base: 'full', md: '75%', lg: '60%' }}
+          minH={'8rem'}
+          mb={{ base: 8, md: 12, lg: 4 }}
         >
           <Box
-            width={{ base: 'full', md: '75%', lg: '50%' }}
+            width={{ base: 'full', md: '75%', lg: '40%' }}
             pb={{ base: 6 }}
             pt={{ base: 6, md: 12 }}
             pl={{ base: 6, lg: 16 }}
@@ -51,21 +49,21 @@ export const LiquidStakingInfo = () => {
             >
               Staking?
             </Text>
-            <Text>Stake MATIC with validators and participate in growth of the network!</Text>
+            <Text fontSize={{ base: 'sm', md: 'md' }}>
+              Stake MATIC with validators and participate in growth of the network!
+            </Text>
           </Box>
         </Flex>
       </Flex>
-      <Flex
-        justifyContent={{ base: 'center', md: 'flex-end' }}
-        mb={{ base: 8, md: 12, lg: 0 }}
-        minH={'12rem'}
-      >
+      <Flex justifyContent={{ base: 'center', md: 'flex-end' }}>
         <Flex
           bgColor={'bg.translucent'}
           textAlign={{ base: 'center', md: 'left' }}
           flexDirection={'column'}
           alignItems={'flex-start'}
-          w={{ base: 'full', md: '50%', lg: '50%' }}
+          w={{ base: 'full', md: '50%', lg: '42.5%' }}
+          minH={'8rem'}
+          mb={{ base: 8, md: 12, lg: 4 }}
         >
           <Box
             width={{ base: 'full', md: '75%', lg: '50%' }}
@@ -81,21 +79,20 @@ export const LiquidStakingInfo = () => {
             >
               Returns!
             </Text>
-            <Text>Get returns for staked MATIC!! Current Avg. APY: __%</Text>
+            <Text fontSize={{ base: 'sm', md: 'md' }}>Get returns for staked MATIC!!</Text>{' '}
+            <Text fontSize={{ base: 'sm', md: 'md' }}>Current Avg. APY: __%</Text>
           </Box>
         </Flex>
       </Flex>
-      <Flex
-        justifyContent={{ base: 'center', md: 'flex-start' }}
-        mb={{ base: 8, md: 12, lg: 0 }}
-        minH={'12rem'}
-      >
+      <Flex justifyContent={{ base: 'center', md: 'flex-start' }}>
         <Flex
           bgColor={'bg.translucent'}
           textAlign={{ base: 'center', md: 'left' }}
           flexDirection={'column'}
           alignItems={'flex-end'}
           w={{ base: 'full', md: '60%', lg: '50%' }}
+          minH={'8rem'}
+          mb={{ base: 8, md: 12, lg: 4 }}
         >
           <Box
             width={{ base: 'full', md: '75%', lg: '50%' }}
@@ -111,7 +108,9 @@ export const LiquidStakingInfo = () => {
             >
               Liquid?!
             </Text>
-            <Text>Trade, invest and use receipt tokens (stMATIC, tMATIC, aMATICb, etc.)!!!</Text>
+            <Text fontSize={{ base: 'sm', md: 'md' }}>
+              Trade, invest and use receipt tokens (stMATIC, tMATIC, aMATICb, etc.)!!!
+            </Text>
           </Box>
         </Flex>
       </Flex>
