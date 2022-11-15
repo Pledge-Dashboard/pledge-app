@@ -1,16 +1,28 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { createContext, FunctionComponent, PropsWithChildren, useEffect, useMemo, useState } from 'react';
-import { DataSnapshot, DataStore, HistoryByPlatform, PlatformNames } from '../types';
+import { DataSnapshotAll, DataStore, HistoryByPlatform, PlatformData, PlatformNames } from '../types';
 
-const DataStoreContext = createContext<DataStore | null>({
+const defaultPlatformData: PlatformData = {
+  priceMatic: 0,
+  price: 0,
+  apr: '0',
+  apy: '0',
+  stakers: '0',
+  totalStaked: {
+    matic: '0',
+    usd: '0',
+  },
+};
+
+const DataStoreContext = createContext<DataStore>({
   current: {
     _id: '',
     timestamp: '',
-    lido: undefined,
-    ankr: undefined,
-    stader: undefined,
-    claystack: undefined,
-    tenderize: undefined,
+    lido: defaultPlatformData,
+    ankr: defaultPlatformData,
+    stader: defaultPlatformData,
+    claystack: defaultPlatformData,
+    tenderize: defaultPlatformData,
   },
   setCurrent: () => {},
   historical: [],
@@ -27,8 +39,8 @@ const DataStoreContext = createContext<DataStore | null>({
 // const DataStoreProvider = DataStoreContext.Provider;
 
 const DataStoreProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
-  const [currentData, setCurrent] = useState<DataSnapshot | undefined>(undefined);
-  const [historical, setHistorical] = useState<Array<DataSnapshot> | undefined>(undefined);
+  const [currentData, setCurrent] = useState<DataSnapshotAll | undefined>(undefined);
+  const [historical, setHistorical] = useState<Array<DataSnapshotAll> | undefined>(undefined);
 
   useEffect(() => {
     (async () => {

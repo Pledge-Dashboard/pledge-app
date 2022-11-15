@@ -17,29 +17,36 @@ export type PlatformNames =
 export type PlatformData = {
   priceMatic: number;
   price: number;
-  apr: string;
+  apr?: string;
+  apy?: string;
   stakers: string;
   totalStaked: {
     matic: string;
     usd: string;
   };
 };
+export interface PlatformDataSnapshot extends PlatformData {
+  _id: string;
+  timestamp: string;
+}
+
 export type Data = {
-  [key in PLATFORMS]?: PlatformData;
+  [key in PLATFORMS]: PlatformData;
 };
-export interface DataSnapshot extends Data {
+
+export interface DataSnapshotAll extends Data {
   _id: string;
   timestamp: string;
 }
 
 export type HistoryByPlatform = {
-  [key in PLATFORMS]: Array<DataSnapshot | undefined>;
+  [key in PLATFORMS]: Array<PlatformDataSnapshot>;
 };
 
 export type DataStore = {
-  current: DataSnapshot | undefined;
-  setCurrent: (current: DataSnapshot) => void;
-  historical: Array<DataSnapshot> | undefined;
-  setHistorical: (historical: Array<DataSnapshot>) => void;
+  current: DataSnapshotAll | undefined;
+  setCurrent: (current: DataSnapshotAll) => void;
+  historical: Array<DataSnapshotAll> | undefined;
+  setHistorical: (historical: Array<DataSnapshotAll>) => void;
   historyByPlatform: HistoryByPlatform;
 };
