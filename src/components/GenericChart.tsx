@@ -106,7 +106,7 @@ const GenericChart: React.FC = () => {
         ...item,
         totalStaked: item.totalStaked.matic,
         totalStakedUSD: item.totalStaked.usd,
-        timestamp: new Date(item.timestamp).getTime(),
+        timestamp: new Date(item.timestamp).getTime() / 1000,
       };
     });
   }, [historyByPlatform]);
