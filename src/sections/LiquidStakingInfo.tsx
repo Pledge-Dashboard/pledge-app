@@ -26,21 +26,64 @@ export const LiquidStakingInfo = () => {
         Understand Liquid Staking
       </Text>
       <Flex justifyContent={{ base: 'center', md: 'flex-start' }}>
-        <Box>
-          <Text>Staking?</Text>
-          <Text>Stake MATIC with validators and participate in growth of the network!</Text>
+        <Box
+          bgColor={'bg.translucent'}
+          textAlign={{ base: 'center', md: 'left' }}
+          mb={8}
+          pb={{ base: 6 }}
+          pt={{ base: 6 }}
+          pl={{ base: 6 }}
+          pr={{ base: 6 }}
+        >
+          <Text
+            fontWeight={'bold'}
+            fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}
+          >
+            Staking?
+          </Text>
+          <Text w={{ base: 'full', md: '80%', lg: '50%' }}>
+            Stake MATIC with validators and participate in growth of the network!
+          </Text>
         </Box>
       </Flex>
       <Flex justifyContent={{ base: 'center', md: 'flex-end' }}>
-        <Box>
-          <Text>Returns!</Text>
-          <Text>Get returns for staked MATIC!! Current Avg. APY: __%</Text>
+        <Box
+          bgColor={'bg.translucent'}
+          textAlign={{ base: 'center', md: 'left' }}
+          mb={8}
+          pb={{ base: 6 }}
+          pt={{ base: 6 }}
+          pl={{ base: 6 }}
+          pr={{ base: 6 }}
+        >
+          <Text
+            fontWeight={'bold'}
+            fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}
+          >
+            Returns!
+          </Text>
+          <Text w={{ base: 'full', md: '80%', lg: '50%' }}>Get returns for staked MATIC!! Current Avg. APY: __%</Text>
         </Box>
       </Flex>
       <Flex justifyContent={{ base: 'center', md: 'flex-start' }}>
-        <Box>
-          <Text>Liquid?!</Text>
-          <Text>Trade, invest and use receipt tokens (stMATIC, tMATIC, aMATICb, etc.)!!!</Text>
+        <Box
+          bgColor={'bg.translucent'}
+          textAlign={{ base: 'center', md: 'left' }}
+          mb={8}
+          pb={{ base: 6 }}
+          pt={{ base: 6 }}
+          pl={{ base: 6 }}
+          pr={{ base: 6 }}
+        >
+          <Text
+            fontWeight={'bold'}
+            fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}
+          >
+            Liquid?!
+          </Text>
+          <Text w={{ base: 'full', md: '80%', lg: '50%' }}>
+            Trade, invest and use receipt tokens (stMATIC, tMATIC, aMATICb, etc.)!!!
+          </Text>
         </Box>
       </Flex>
     </Box>
