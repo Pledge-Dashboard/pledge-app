@@ -35,7 +35,7 @@ export const LiquidStakingInfo = () => {
           blur={100}
           opacity={1}
           position="absolute"
-          mixBlendMode={'color-dodge'}
+          mixBlendMode={'color'}
           left={0}
           transform="translate(-40%, -4rem)"
           w={{ base: '12rem', md: '24rem' }}
@@ -56,7 +56,7 @@ export const LiquidStakingInfo = () => {
           blur={100}
           opacity={1}
           position="absolute"
-          mixBlendMode={'color-dodge'}
+          mixBlendMode={'color'}
           right={0}
           transform="translate(30%, 6rem)"
           h={{ base: '12rem', md: '12rem' }}
