@@ -1,4 +1,5 @@
 import { Flex, Tabs, TabList, TabPanels, Tab, TabPanel, Box } from '@chakra-ui/react';
+import GenericChart from '../components/GenericChart';
 import { SectionContainer } from '../layouts/SectionContainer';
 
 export const Stats = () => {
@@ -75,6 +76,10 @@ export const Stats = () => {
             </TabPanel>
           ))}
         </TabPanels>
+
+        <Box>
+          <GenericChart />
+        </Box>
       </Tabs>
     </SectionContainer>
   );
