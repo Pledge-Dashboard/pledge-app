@@ -11,10 +11,10 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Translat3</title>
+        <title>Pledge</title>
         <meta
           name="description"
-          content="The fastest way to localize your projects powered by Polygon"
+          content="Liquid Staking Derivates on Polygon PoS"
         />
         <link
           rel="icon"
