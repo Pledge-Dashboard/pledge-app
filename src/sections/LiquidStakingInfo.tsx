@@ -25,66 +25,95 @@ export const LiquidStakingInfo = () => {
       >
         Understand Liquid Staking
       </Text>
-      <Flex justifyContent={{ base: 'center', md: 'flex-start' }}>
-        <Box
+      <Flex
+        justifyContent={{ base: 'center', md: 'flex-start' }}
+        mb={{ base: 8, md: 12, lg: 0 }}
+        minH={'12rem'}
+      >
+        <Flex
           bgColor={'bg.translucent'}
           textAlign={{ base: 'center', md: 'left' }}
-          mb={8}
-          pb={{ base: 6 }}
-          pt={{ base: 6 }}
-          pl={{ base: 6 }}
-          pr={{ base: 6 }}
+          flexDirection={'column'}
+          alignItems={'flex-end'}
+          w={{ base: 'full', md: '75%', lg: '50%' }}
         >
-          <Text
-            fontWeight={'bold'}
-            fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}
+          <Box
+            width={{ base: 'full', md: '75%', lg: '50%' }}
+            pb={{ base: 6 }}
+            pt={{ base: 6, md: 12 }}
+            pl={{ base: 6, lg: 16 }}
+            pr={{ base: 6, lg: 10 }}
           >
-            Staking?
-          </Text>
-          <Text w={{ base: 'full', md: '80%', lg: '50%' }}>
-            Stake MATIC with validators and participate in growth of the network!
-          </Text>
-        </Box>
+            <Text
+              fontWeight={'bold'}
+              fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}
+              mb={4}
+            >
+              Staking?
+            </Text>
+            <Text>Stake MATIC with validators and participate in growth of the network!</Text>
+          </Box>
+        </Flex>
       </Flex>
-      <Flex justifyContent={{ base: 'center', md: 'flex-end' }}>
-        <Box
+      <Flex
+        justifyContent={{ base: 'center', md: 'flex-end' }}
+        mb={{ base: 8, md: 12, lg: 0 }}
+        minH={'12rem'}
+      >
+        <Flex
           bgColor={'bg.translucent'}
           textAlign={{ base: 'center', md: 'left' }}
-          mb={8}
-          pb={{ base: 6 }}
-          pt={{ base: 6 }}
-          pl={{ base: 6 }}
-          pr={{ base: 6 }}
+          flexDirection={'column'}
+          alignItems={'flex-start'}
+          w={{ base: 'full', md: '50%', lg: '50%' }}
         >
-          <Text
-            fontWeight={'bold'}
-            fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}
+          <Box
+            width={{ base: 'full', md: '75%', lg: '50%' }}
+            pb={{ base: 6 }}
+            pt={{ base: 6, md: 12 }}
+            pl={{ base: 6, lg: 16 }}
+            pr={{ base: 6, lg: 10 }}
           >
-            Returns!
-          </Text>
-          <Text w={{ base: 'full', md: '80%', lg: '50%' }}>Get returns for staked MATIC!! Current Avg. APY: __%</Text>
-        </Box>
+            <Text
+              fontWeight={'bold'}
+              fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}
+              mb={4}
+            >
+              Returns!
+            </Text>
+            <Text>Get returns for staked MATIC!! Current Avg. APY: __%</Text>
+          </Box>
+        </Flex>
       </Flex>
-      <Flex justifyContent={{ base: 'center', md: 'flex-start' }}>
-        <Box
+      <Flex
+        justifyContent={{ base: 'center', md: 'flex-start' }}
+        mb={{ base: 8, md: 12, lg: 0 }}
+        minH={'12rem'}
+      >
+        <Flex
           bgColor={'bg.translucent'}
           textAlign={{ base: 'center', md: 'left' }}
-          mb={8}
-          pb={{ base: 6 }}
-          pt={{ base: 6 }}
-          pl={{ base: 6 }}
-          pr={{ base: 6 }}
+          flexDirection={'column'}
+          alignItems={'flex-end'}
+          w={{ base: 'full', md: '60%', lg: '50%' }}
         >
-          <Text
-            fontWeight={'bold'}
-            fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}
+          <Box
+            width={{ base: 'full', md: '75%', lg: '50%' }}
+            pb={{ base: 6 }}
+            pt={{ base: 6, md: 12 }}
+            pl={{ base: 6, lg: 16 }}
+            pr={{ base: 6, lg: 10 }}
           >
-            Liquid?!
-          </Text>
-          <Text w={{ base: 'full', md: '80%', lg: '50%' }}>
-            Trade, invest and use receipt tokens (stMATIC, tMATIC, aMATICb, etc.)!!!
-          </Text>
-        </Box>
+            <Text
+              fontWeight={'bold'}
+              fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}
+              mb={4}
+            >
+              Liquid?!
+            </Text>
+            <Text>Trade, invest and use receipt tokens (stMATIC, tMATIC, aMATICb, etc.)!!!</Text>
+          </Box>
+        </Flex>
       </Flex>
     </Box>
   );
