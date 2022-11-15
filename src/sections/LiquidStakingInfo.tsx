@@ -44,7 +44,11 @@ export const LiquidStakingInfo = () => {
           alignment="flex-start"
         />
       </Flex>
-      <Flex justifyContent={{ base: 'center', md: 'flex-start' }}>
+      <Flex
+        justifyContent={{ base: 'center', md: 'flex-start' }}
+        position="relative"
+        bottom={{ base: 0, md: 0, lg: 16 }}
+      >
         <StakeInfoCard
           title="Liquid?"
           description=" Trade, invest and use receipt tokens (stMATIC, tMATIC, aMATICb, etc.)!!!"
