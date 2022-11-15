@@ -1,70 +1,49 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
-import { SectionContainer } from '../layouts/SectionContainer';
 
 export const LiquidStakingInfo = () => {
   return (
-    <SectionContainer
-      id="LiquidStaking"
-      title="what?"
+    <Box
+      width={'full'}
+      textAlign="center"
+      minHeight={'95vh'}
+      id="LiquidStakingInfo"
+      as="section"
+      padding={{ base: 8, md: 0 }}
     >
-      <Flex
-        grow={'1'}
-        justifyContent={'center'}
-        alignItems={'center'}
-        gap={{ base: '6', md: '8' }}
-        flexDir={{ base: 'column', md: 'row' }}
-        mt={{ base: '8', md: '0' }}
+      <Text
+        fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
+        fontWeight={500}
+        bg="bg.gradient"
+        backgroundClip="text"
+        margin={'auto'}
       >
-        <Box
-          bgColor={'bg.translucent'}
-          py={8}
-          px={4}
-          borderRadius={'xl'}
-          boxShadow={'xl'}
-          width={'xs'}
-        >
-          <Text
-            fontSize={{ base: 'md', md: 'lg', lg: 'xl' }}
-            fontWeight="bold"
-          >
-            Deposit Your Tokens
-          </Text>
-          <Text fontSize={{ base: 'sm', md: 'md', lg: 'md' }}> on any liquid stacking platform of your choice </Text>
-        </Box>
-        <Box
-          bgColor={'bg.translucent'}
-          py={8}
-          px={4}
-          borderRadius={'xl'}
-          boxShadow={'xl'}
-          width={'xs'}
-        >
-          <Text
-            fontSize={{ base: 'md', md: 'lg', lg: 'xl' }}
-            fontWeight="bold"
-          >
-            Deposit Your Tokens
-          </Text>
-          <Text fontSize={{ base: 'sm', md: 'md', lg: 'md' }}> on any liquid stacking platform of your choice </Text>
-        </Box>
-        <Box
-          bgColor={'bg.translucent'}
-          py={8}
-          px={4}
-          borderRadius={'xl'}
-          boxShadow={'xl'}
-          width={'xs'}
-        >
-          <Text
-            fontSize={{ base: 'md', md: 'lg', lg: 'xl' }}
-            fontWeight="bold"
-          >
-            Deposit Your Tokens
-          </Text>
-          <Text fontSize={{ base: 'sm', md: 'md', lg: 'md' }}> on any liquid stacking platform of your choice </Text>
+        what?
+      </Text>
+      <Text
+        fontSize={{ base: 'md', md: 'lg', lg: 'xl' }}
+        mb={8}
+      >
+        Understand Liquid Staking
+      </Text>
+      <Flex justifyContent={{ base: 'center', md: 'flex-start' }}>
+        <Box>
+          <Text>Staking?</Text>
+          <Text>Stake MATIC with validators and participate in growth of the network!</Text>
         </Box>
       </Flex>
-    </SectionContainer>
+      <Flex justifyContent={{ base: 'center', md: 'flex-end' }}>
+        <Box>
+          <Text>Returns!</Text>
+          <Text>Get returns for staked MATIC!! Current Avg. APY: __%</Text>
+        </Box>
+      </Flex>
+      <Flex justifyContent={{ base: 'center', md: 'flex-start' }}>
+        <Box>
+          <Text>Liquid?!</Text>
+          <Text>Trade, invest and use receipt tokens (stMATIC, tMATIC, aMATICb, etc.)!!!</Text>
+        </Box>
+      </Flex>
+    </Box>
   );
 };
 
