@@ -1,5 +1,10 @@
 import { Flex, Tabs, TabList, TabPanels, Tab, TabPanel, Box } from '@chakra-ui/react';
+// import GenericChart from '../components/GenericChart';
 import { SectionContainer } from '../layouts/SectionContainer';
+import dynamic from 'next/dynamic';
+const GenericChart = dynamic(() => import('../components/GenericChart'), {
+  ssr: false,
+});
 
 export const Stats = () => {
   return (
@@ -7,8 +12,9 @@ export const Stats = () => {
       id="statistics"
       title="stats!"
     >
+      <GenericChart></GenericChart>
       <Tabs
-        variant="unstyled"
+        variant="unstyled "
         mt={12}
       >
         <TabList gap={{ base: 4, md: 8 }}>
