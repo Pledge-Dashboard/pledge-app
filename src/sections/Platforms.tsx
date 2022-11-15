@@ -1,6 +1,6 @@
 import { SectionContainer } from '../layouts/SectionContainer';
 import { Text, Grid, GridItem } from '@chakra-ui/react';
-import { PLATFORMS } from '../context/DataStore';
+import { PLATFORMS } from '../types';
 
 const Platforms = () => {
   return (
