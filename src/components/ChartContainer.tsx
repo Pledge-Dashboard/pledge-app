@@ -1,8 +1,7 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, useMediaQuery } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import FieldSwitcher from '../components/FieldSwitcher';
-import { useContainerDimensions } from '../hooks/useContainerDimensions';
 import { FieldNames, PlatformNames } from '../types';
 import PlatformSwitcher from './PlatformSwitcher';
 const GenericChart = dynamic(() => import('../components/GenericChart'), {
@@ -16,47 +15,58 @@ const ChartContainer = ({
   platform: PlatformNames;
   setPlatform: (platform: PlatformNames) => void;
 }) => {
-  const ref = useRef(null);
-  const { height, width } = useContainerDimensions(ref);
+  const [isLargerThan1200] = useMediaQuery('(min-width: 1200px)', {
+    ssr: true,
+    fallback: false, // return false on the server, and re-evaluate on the client side
+  });
+  const [isLargerThan1000] = useMediaQuery('(min-width: 1000px)', {
+    ssr: true,
+    fallback: false, // return false on the server, and re-evaluate on the client side
+  });
+  const [isLargerThan500] = useMediaQuery('(min-width: 500px)', {
+    ssr: true,
+    fallback: false, // return false on the server, and re-evaluate on the client side
+  });
 
   const [field, setField] = useState<FieldNames>('price');
 
   return (
     <Flex
       id="chart-container"
-      w="60%"
-      my="10rem"
+      w={{ base: '100%', xl: '60%' }}
+      my="5rem"
+      mb={{ base: 0, xl: '5rem' }}
       maxH="60rem"
       bg="#242C4D"
-      justify="center"
-      align="center"
-      p={{ base: '5rem', md: '10rem 15rem 5rem 5rem' }}
-      ref={ref}
+      p={{ base: '2rem', xl: '3rem 11rem 3rem 2rem' }}
       flexDir="column"
     >
       <PlatformSwitcher
         platform={platform}
         setPlatform={setPlatform}
       />
-      <Box
+
+      <Flex
         bg="blackAlpha.400"
         padding="5"
+        flex={1}
+        flexDir="column"
       >
-        <Box mb="10">
-          <FieldSwitcher
-            field={field}
-            setField={setField}
+        <FieldSwitcher
+          field={field}
+          setField={setField}
+          platform={platform}
+        />
+
+        <Box m="auto">
+          <GenericChart
             platform={platform}
+            field={field}
+            width={isLargerThan1000 ? (isLargerThan1200 ? 600 : 400) : 300}
+            height={isLargerThan500 ? 500 : 300}
           />
         </Box>
-
-        <GenericChart
-          platform={platform}
-          field={field}
-          width={width - 28 * 10}
-          height={height - 16 * 15}
-        />
-      </Box>
+      </Flex>
     </Flex>
   );
 };

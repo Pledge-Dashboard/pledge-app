@@ -128,6 +128,13 @@ const GenericChart: React.FC<{
         lineColor: '#ff007a',
         lineWidth: 3,
       });
+      series.priceScale().applyOptions({
+        autoScale: false,
+        scaleMargins: {
+          top: 0.3,
+          bottom: 0.3,
+        },
+      });
       // update the title when hovering on the chart
       chart.subscribeCrosshairMove(function (param) {
         if (
@@ -137,7 +144,7 @@ const GenericChart: React.FC<{
         ) {
           // setValue(0);
         } else {
-          const price = parseFloat(param?.seriesPrices?.get(series)?.toString() || '0');
+          // const price = parseFloat(param?.seriesPrices?.get(series)?.toString() || '0');
           // setValue(price);
         }
       });
@@ -147,8 +154,8 @@ const GenericChart: React.FC<{
         series.setData(formattedData);
       }
       setChartCreated(chart);
-    } else if (chartCreated && !formattedData) {
-      if (ref.current) ref.current.innerHTML = 'No Data Available';
+    } else if (chartCreated && formattedData.length < 2) {
+      if (ref.current) ref.current.innerHTML = 'Data Loading';
       setChartCreated(undefined);
     }
     return () => {
@@ -166,8 +173,8 @@ const GenericChart: React.FC<{
 
   return (
     <Box
-      minW={width}
-      minH={height}
+      w={width}
+      h={height}
     >
       {formattedData && (
         <Box

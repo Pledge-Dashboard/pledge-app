@@ -13,11 +13,11 @@ const InfoContainer = ({ platform }: { platform: PlatformNames }) => {
   return (
     <Box
       id="info-container"
-      w="50%"
-      h={{ base: '100%', md: '50%' }}
+      w={{ base: '100%', xl: '50%' }}
+      h={{ base: '100%', xl: '50%' }}
       p="2rem 3rem"
       m="auto"
-      ml="-10%"
+      ml={{ base: 0, xl: '-10%' }}
       bg="#000C3D"
       zIndex={10}
     >
@@ -34,14 +34,16 @@ const InfoContainer = ({ platform }: { platform: PlatformNames }) => {
         mb="4"
       >
         <Code
+          fontWeight="bold"
           bg="whiteAlpha.100"
           p="1rem"
           borderRadius="sm"
           fontSize="sm"
         >
-          APY: {formattedNum(data.apy || data.apr)}
+          APY: {formattedNum(data.apy || data.apr)}%
         </Code>
         <Code
+          fontWeight="bold"
           bg="whiteAlpha.100"
           p="1rem"
           borderRadius="sm"
@@ -50,6 +52,7 @@ const InfoContainer = ({ platform }: { platform: PlatformNames }) => {
           Stakers: {formattedNum(data.stakers) || 'N/a'}
         </Code>
         <Code
+          fontWeight="bold"
           bg="whiteAlpha.100"
           p="1rem"
           borderRadius="sm"
@@ -58,6 +61,7 @@ const InfoContainer = ({ platform }: { platform: PlatformNames }) => {
           TVL: {formattedNum(data.totalStaked.usd)}
         </Code>
         <Code
+          fontWeight="bold"
           bg="whiteAlpha.100"
           p="1rem"
           borderRadius="sm"
@@ -66,6 +70,7 @@ const InfoContainer = ({ platform }: { platform: PlatformNames }) => {
           MATIC Staked: {formattedNum(data.totalStaked.matic)}
         </Code>
         <Code
+          fontWeight="bold"
           bg="whiteAlpha.100"
           p="1rem"
           borderRadius="sm"
@@ -74,6 +79,7 @@ const InfoContainer = ({ platform }: { platform: PlatformNames }) => {
           {PLATFORM_TOKEN[platform]}/MATIC: {formattedNum(data.priceMatic)}
         </Code>
         <Code
+          fontWeight="bold"
           bg="whiteAlpha.100"
           p="1rem"
           borderRadius="sm"

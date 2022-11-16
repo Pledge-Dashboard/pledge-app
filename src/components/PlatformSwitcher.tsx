@@ -26,6 +26,7 @@ const PlatformSwitcher: FC<PlatformSwitcherProps> = ({ platform, setPlatform }) 
     <Flex
       gap="10"
       mb="8"
+      w="full"
     >
       <PlatformButton
         platformName="lido"

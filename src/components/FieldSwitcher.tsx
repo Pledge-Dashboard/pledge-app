@@ -1,5 +1,5 @@
 import { Button, Flex } from '@chakra-ui/react';
-import { FC, useContext } from 'react';
+import { FC, useContext, useEffect } from 'react';
 import DataStoreContext from '../context/DataStore';
 import { FieldNames, PlatformNames, PLATFORM_TOKEN } from '../types';
 
@@ -29,12 +29,20 @@ const FieldButton: FC<FieldSwitcherProps & { fieldName: FieldNames; label: strin
 
 const FieldSwitcher: FC<FieldSwitcherProps & { platform: PlatformNames }> = ({ field, setField, platform }) => {
   const { current } = useContext(DataStoreContext);
+  useEffect(() => {
+    if (field === 'apy' && !current?.[platform].apy) {
+      setField('apr');
+    } else if (field === 'apr' && !current?.[platform].apr) {
+      setField('apy');
+    }
+  }, [current, platform, setField]);
   return (
     <Flex
       justifyContent="start"
       rowGap="2"
       columnGap="4"
       wrap="wrap"
+      mb="4"
     >
       <FieldButton
         fieldName="totalStaked"
