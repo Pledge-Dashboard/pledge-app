@@ -3,19 +3,10 @@ import { Box } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import { createChart, IChartApi, ISeriesApi } from 'lightweight-charts';
-import Numeral from 'numeral';
 import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import DataStoreContext from '../context/DataStore';
 import { FieldNames, PlatformNames } from '../types';
-
-const toK = (num: any) => {
-  return Numeral(num).format('0.[00]a');
-};
-const priceFormatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  minimumFractionDigits: 2,
-});
+import { formattedNum } from '../utils/numberFormatter';
 
 export enum TimePeriod {
   fifteenMinutes = 15 * 60,
@@ -29,45 +20,6 @@ export const windowSizes: { [timePeriod in TimePeriod]: number } = {
   [TimePeriod.oneHour]: 3600 * 24 * 7 * 2,
   [TimePeriod.fourHour]: 3600 * 24 * 30,
   [TimePeriod.oneDay]: 3600 * 24 * 90,
-};
-
-const formattedNum = (number: any, usd = false) => {
-  if (isNaN(number) || number === '' || number === undefined) {
-    return usd ? '0' : 0;
-  }
-  const num = parseFloat(number);
-
-  if (num > 500000) {
-    return (usd ? '' : '') + toK(num.toFixed(0));
-  }
-
-  if (num === 0) {
-    if (usd) {
-      return '0';
-    }
-    return 0;
-  }
-
-  if (num < 0.0001 && num > 0) {
-    return usd ? '< 0.0001' : '< 0.0001';
-  }
-
-  if (num > 1000) {
-    return usd
-      ? '' + Number(parseFloat(num.toString()).toFixed(0)).toLocaleString()
-      : '' + Number(parseFloat(num.toString()).toFixed(0)).toLocaleString();
-  }
-
-  if (usd) {
-    if (num < 0.1) {
-      return '' + Number(parseFloat(num.toString()).toFixed(4));
-    } else {
-      const usdString = priceFormatter.format(num);
-      return '' + usdString.slice(1, usdString.length);
-    }
-  }
-
-  return Number(parseFloat(num.toString()).toFixed(5));
 };
 
 dayjs.extend(utc);
@@ -88,6 +40,7 @@ const GenericChart: React.FC<{
           priceMatic: 0,
           price: 0,
           apy: '0',
+          apr: '0',
           stakers: '0',
           totalStaked: '0',
           totalStakedUSD: '0',
@@ -101,10 +54,11 @@ const GenericChart: React.FC<{
         ...item,
         totalStaked: item.totalStaked.matic,
         totalStakedUSD: item.totalStaked.usd,
+        apr: item.apr,
         timestamp: Number((new Date(item.timestamp).getTime() / 1000).toFixed(0)),
       };
     });
-  }, [historyByPlatform]);
+  }, [historyByPlatform, platform]);
 
   const ref = useRef<HTMLDivElement | null>(null);
   const HEIGHT = height;

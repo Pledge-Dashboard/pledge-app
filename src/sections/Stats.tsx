@@ -1,9 +1,12 @@
 import { Flex } from '@chakra-ui/react';
+import { useState } from 'react';
 import ChartContainer from '../components/ChartContainer';
 import InfoContainer from '../components/InfoContainer';
 import { SectionContainer } from '../layouts/SectionContainer';
+import { PlatformNames } from '../types';
 
 export const Stats = () => {
+  const [platform, setPlatform] = useState<PlatformNames>('ankr');
   return (
     <SectionContainer
       id="Statistics"
@@ -15,8 +18,11 @@ export const Stats = () => {
         flex={1}
         alignContent="center"
       >
-        <ChartContainer platform="lido" />
-        <InfoContainer />
+        <ChartContainer
+          platform={platform}
+          setPlatform={setPlatform}
+        />
+        <InfoContainer platform={platform} />
       </Flex>
     </SectionContainer>
   );

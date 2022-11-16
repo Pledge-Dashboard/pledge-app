@@ -16,6 +16,12 @@ export const PLATFORM_TOKEN = {
   stader: 'MATICx',
   tenderize: 'tMATIC',
 };
+export const PLATFORM_NAME = {
+  lido: 'Lido Finance',
+  ankr: 'Ankr',
+  stader: 'Stader',
+  tenderize: 'Tenderize',
+};
 
 // values of platforms enum
 export type PlatformNames = 'lido' | 'ankr' | 'stader' | 'tenderize';
@@ -24,6 +30,7 @@ export type PlatformData = {
   priceMatic: number;
   price: number;
   apy: string;
+  apr?: string;
   stakers: string;
   totalStaked: {
     matic: string;
@@ -54,4 +61,4 @@ export type DataStore = {
   historyByPlatform: HistoryByPlatform;
 };
 
-export type FieldNames = keyof PlatformDataSnapshot | 'totalStakedUSD';
+export type FieldNames = keyof PlatformDataSnapshot | 'totalStakedUSD' | 'apr';

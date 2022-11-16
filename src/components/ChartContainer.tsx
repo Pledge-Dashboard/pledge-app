@@ -4,11 +4,18 @@ import { useRef, useState } from 'react';
 import FieldSwitcher from '../components/FieldSwitcher';
 import { useContainerDimensions } from '../hooks/useContainerDimensions';
 import { FieldNames, PlatformNames } from '../types';
+import PlatformSwitcher from './PlatformSwitcher';
 const GenericChart = dynamic(() => import('../components/GenericChart'), {
   ssr: false,
 });
 
-const ChartContainer = ({ platform }: { platform: PlatformNames }) => {
+const ChartContainer = ({
+  platform,
+  setPlatform,
+}: {
+  platform: PlatformNames;
+  setPlatform: (platform: PlatformNames) => void;
+}) => {
   const ref = useRef(null);
   const { height, width } = useContainerDimensions(ref);
 
@@ -25,7 +32,12 @@ const ChartContainer = ({ platform }: { platform: PlatformNames }) => {
       align="center"
       p={{ base: '5rem', md: '10rem 15rem 5rem 5rem' }}
       ref={ref}
+      flexDir="column"
     >
+      <PlatformSwitcher
+        platform={platform}
+        setPlatform={setPlatform}
+      />
       <Box
         bg="blackAlpha.400"
         padding="5"
@@ -34,13 +46,14 @@ const ChartContainer = ({ platform }: { platform: PlatformNames }) => {
           <FieldSwitcher
             field={field}
             setField={setField}
+            platform={platform}
           />
         </Box>
 
         <GenericChart
           platform={platform}
           field={field}
-          width={width - 35 * 10}
+          width={width - 28 * 10}
           height={height - 16 * 15}
         />
       </Box>

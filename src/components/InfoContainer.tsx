@@ -1,7 +1,15 @@
 import { Box, Grid, Heading, Code } from '@chakra-ui/react';
-import { FC } from 'react';
+import { useContext, useMemo } from 'react';
+import DataStoreContext, { defaultPlatformData } from '../context/DataStore';
+import { PlatformNames, PLATFORM_NAME, PLATFORM_TOKEN } from '../types';
+import { formattedNum } from '../utils/numberFormatter';
 
-const InfoContainer: FC = () => {
+const InfoContainer = ({ platform }: { platform: PlatformNames }) => {
+  const { current } = useContext(DataStoreContext);
+  const data = useMemo(() => {
+    return current?.[platform] ?? defaultPlatformData;
+  }, [current, platform]);
+
   return (
     <Box
       id="info-container"
@@ -11,13 +19,14 @@ const InfoContainer: FC = () => {
       m="auto"
       ml="-10%"
       bg="#000C3D"
+      zIndex={10}
     >
       <Heading
         as="h4"
         size="lg"
         mb="8"
       >
-        Lido
+        {PLATFORM_NAME[platform]}
       </Heading>
       <Grid
         templateColumns="1fr 1fr"
@@ -29,7 +38,7 @@ const InfoContainer: FC = () => {
           borderRadius="sm"
           fontSize="sm"
         >
-          APY: 100%
+          APY: {data.apy || data.apr}
         </Code>
         <Code
           bg="whiteAlpha.100"
@@ -37,7 +46,7 @@ const InfoContainer: FC = () => {
           borderRadius="sm"
           fontSize="sm"
         >
-          Stakers: 100
+          Stakers: {formattedNum(data.stakers) || 'N/a'}
         </Code>
         <Code
           bg="whiteAlpha.100"
@@ -45,7 +54,7 @@ const InfoContainer: FC = () => {
           borderRadius="sm"
           fontSize="sm"
         >
-          stMATIC/MATIC: 1.11
+          TVL: {formattedNum(data.totalStaked.usd)}
         </Code>
         <Code
           bg="whiteAlpha.100"
@@ -53,7 +62,23 @@ const InfoContainer: FC = () => {
           borderRadius="sm"
           fontSize="sm"
         >
-          stMATIC/USD: 1.12
+          MATIC Staked: {formattedNum(data.totalStaked.matic)}
+        </Code>
+        <Code
+          bg="whiteAlpha.100"
+          p="1rem"
+          borderRadius="sm"
+          fontSize="sm"
+        >
+          {PLATFORM_TOKEN[platform]}/MATIC: {formattedNum(data.priceMatic)}
+        </Code>
+        <Code
+          bg="whiteAlpha.100"
+          p="1rem"
+          borderRadius="sm"
+          fontSize="sm"
+        >
+          {PLATFORM_TOKEN[platform]}/USD: {formattedNum(data.price)}
         </Code>
       </Grid>
     </Box>

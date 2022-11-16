@@ -3,7 +3,7 @@ import { createContext, FunctionComponent, PropsWithChildren, useMemo } from 're
 import { DataSnapshotAll, DataStore, HistoryByPlatform, PlatformData, PlatformNames } from '../types';
 import useSWR from 'swr';
 
-const defaultPlatformData: PlatformData = {
+export const defaultPlatformData: PlatformData = {
   priceMatic: 0,
   price: 0,
   apy: '0',
