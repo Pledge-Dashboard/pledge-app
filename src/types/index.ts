@@ -7,18 +7,12 @@ export enum PLATFORMS {
 }
 
 // values of platforms enum
-export type PlatformNames =
-  | PLATFORMS.LIDO
-  | PLATFORMS.ANKR
-  | PLATFORMS.STADER
-  | PLATFORMS.CLAYSTACK
-  | PLATFORMS.TENDERIZE;
+export type PlatformNames = 'lido' | 'ankr' | 'stader' | 'claystack' | 'tenderize';
 
 export type PlatformData = {
   priceMatic: number;
   price: number;
-  apr?: string;
-  apy?: string;
+  apy: string;
   stakers: string;
   totalStaked: {
     matic: string;
