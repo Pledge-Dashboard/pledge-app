@@ -23,7 +23,6 @@ export const Landing = () => {
         top="0"
         right="0"
         transform="translate(50%, -60%)"
-        // display={{ base: 'none', lg: 'block' }}
       />
       <Text
         fontSize={{ base: '5xl', md: '6xl', lg: '7xl' }}

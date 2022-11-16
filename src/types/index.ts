@@ -59,6 +59,8 @@ export type DataStore = {
   current: DataSnapshotAll | undefined;
   historical: Array<DataSnapshotAll> | undefined;
   historyByPlatform: HistoryByPlatform;
+  averageAPY: string;
+  totalStaked: string;
 };
 
 export type FieldNames = keyof PlatformDataSnapshot | 'totalStakedUSD' | 'apr';

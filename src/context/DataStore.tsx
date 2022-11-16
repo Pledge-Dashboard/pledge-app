@@ -2,6 +2,7 @@
 import { createContext, FunctionComponent, PropsWithChildren, useMemo } from 'react';
 import { DataSnapshotAll, DataStore, HistoryByPlatform, PlatformData, PlatformNames } from '../types';
 import useSWR from 'swr';
+import { formattedNum } from '../utils/numberFormatter';
 
 export const defaultPlatformData: PlatformData = {
   priceMatic: 0,
@@ -32,6 +33,8 @@ const DataStoreContext = createContext<DataStore>({
     // claystack: [],
     tenderize: [],
   },
+  averageAPY: '0',
+  totalStaked: '0',
 });
 
 const fetcher = (input: RequestInfo | URL, init?: RequestInit | undefined) =>
@@ -65,12 +68,44 @@ const DataStoreProvider: FunctionComponent<PropsWithChildren> = ({ children }) =
     return defaultHistoryByPlatform;
   }, [historical]);
 
+  const averageAPY = useMemo(() => {
+    if (currentData) {
+      let platforms = 0;
+
+      const res = Object.values(currentData).reduce((acc, platform) => {
+        if (platform?.apy || platform?.apr) {
+          platforms += 1;
+          acc += Number(platform?.apy ?? platform.apr);
+        }
+        return acc;
+      }, 0);
+
+      return formattedNum(res / platforms).toString();
+    }
+    return 'N/a';
+  }, [currentData]);
+
+  const totalStaked = useMemo(() => {
+    if (currentData) {
+      const res = Object.values(currentData).reduce((acc, platform) => {
+        if (platform?.totalStaked) {
+          acc += Number(platform.totalStaked.matic);
+        }
+        return acc;
+      }, 0);
+      return formattedNum(res).toString();
+    }
+    return '0';
+  }, [currentData]);
+
   return (
     <DataStoreContext.Provider
       value={{
         current: currentData,
         historical: historical,
         historyByPlatform,
+        averageAPY,
+        totalStaked,
       }}
     >
       {children}
