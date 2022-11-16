@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import React, { useState, useEffect, useRef, useContext, useMemo } from 'react';
-import { createChart, IChartApi } from 'lightweight-charts';
+import { Box } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
+import { createChart, IChartApi, ISeriesApi } from 'lightweight-charts';
 import Numeral from 'numeral';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import DataStoreContext from '../context/DataStore';
-import { PlatformDataSnapshot, PlatformNames } from '../types';
-import { Box, Text } from '@chakra-ui/react';
+import { FieldNames, PlatformNames } from '../types';
 
-export const toK = (num: any) => {
+const toK = (num: any) => {
   return Numeral(num).format('0.[00]a');
 };
 const priceFormatter = new Intl.NumberFormat('en-US', {
@@ -31,19 +31,13 @@ export const windowSizes: { [timePeriod in TimePeriod]: number } = {
   [TimePeriod.oneDay]: 3600 * 24 * 90,
 };
 
-export const windowText: { [timePeriod in TimePeriod]?: string } = {
-  [TimePeriod.fifteenMinutes]: 'Past 24 Hours',
-  [TimePeriod.oneHour]: 'Past 2 Weeks',
-  [TimePeriod.fourHour]: 'Past 1 Month',
-  [TimePeriod.oneDay]: 'Past 3 Months',
-};
-export const formattedNum = (number: any, usd = false) => {
+const formattedNum = (number: any, usd = false) => {
   if (isNaN(number) || number === '' || number === undefined) {
     return usd ? '0' : 0;
   }
   const num = parseFloat(number);
 
-  if (num > 500000000) {
+  if (num > 500000) {
     return (usd ? '' : '') + toK(num.toFixed(0));
   }
 
@@ -78,13 +72,14 @@ export const formattedNum = (number: any, usd = false) => {
 
 dayjs.extend(utc);
 
-const GenericChart: React.FC = () => {
-  // reference for DOM element to create with chart
-  // const field = "rate0";
+const GenericChart: React.FC<{
+  width: number;
+  height: number;
+  field: FieldNames;
+  platform: PlatformNames;
+}> = ({ width, height, field, platform }) => {
   const { historyByPlatform } = useContext(DataStoreContext);
-  const [platform, setPlatform] = useState<PlatformNames>('lido');
-  const [field, setField] = useState<keyof PlatformDataSnapshot>('price');
-  const [value, setValue] = useState<number>(0);
+  // const [value, setValue] = useState<number>(0);
 
   const data = useMemo(() => {
     if (!historyByPlatform?.[platform])
@@ -106,17 +101,17 @@ const GenericChart: React.FC = () => {
         ...item,
         totalStaked: item.totalStaked.matic,
         totalStakedUSD: item.totalStaked.usd,
-        timestamp: new Date(item.timestamp).getTime() / 1000,
+        timestamp: Number((new Date(item.timestamp).getTime() / 1000).toFixed(0)),
       };
     });
   }, [historyByPlatform]);
 
   const ref = useRef<HTMLDivElement | null>(null);
-  const HEIGHT = 400;
-  const WIDTH = 600;
+  const HEIGHT = height;
+  const WIDTH = width;
 
-  const [chart, setChart] = useState<IChartApi | undefined>(undefined);
-  const [chartCreated, setChartCreated] = useState<boolean>(false);
+  const [chartCreated, setChartCreated] = useState<IChartApi | undefined>(undefined);
+
   const formattedData = useMemo(
     () =>
       data.map((entry) => {
@@ -125,9 +120,8 @@ const GenericChart: React.FC = () => {
           value: parseFloat(String(entry[field])).toString(),
         };
       }),
-    [data]
+    [data, field]
   );
-  console.log(data, formattedData);
 
   // adjust the scale based on the type of chart
   const topScale = 0.32;
@@ -135,9 +129,11 @@ const GenericChart: React.FC = () => {
 
   // if no chart created yet, create one with options and add to DOM manually
   useEffect(() => {
-    if (!chartCreated && formattedData.length > 0) {
-      setChartCreated(true);
-      const chart = createChart(ref.current ? ref.current : '', {
+    let series: ISeriesApi<'Area'>;
+    let chart: IChartApi;
+
+    if (formattedData.length > 0) {
+      chart = createChart(ref.current ? ref.current : '', {
         width: WIDTH,
         height: HEIGHT,
         layout: {
@@ -172,7 +168,7 @@ const GenericChart: React.FC = () => {
           priceFormatter: (val: any) => formattedNum(val, true),
         },
       });
-      const series = chart.addAreaSeries({
+      series = chart.addAreaSeries({
         topColor: '#ff007a',
         bottomColor: 'rgba(255, 0, 122, 0)',
         lineColor: '#ff007a',
@@ -185,10 +181,10 @@ const GenericChart: React.FC = () => {
           param.time === undefined ||
           (param?.point && (param.point.x < 0 || param.point.x > WIDTH || param.point.y < 0 || param.point.y > HEIGHT))
         ) {
-          setValue(0);
+          // setValue(0);
         } else {
           const price = parseFloat(param?.seriesPrices?.get(series)?.toString() || '0');
-          setValue(price);
+          // setValue(price);
         }
       });
       chart.timeScale().fitContent();
@@ -196,36 +192,34 @@ const GenericChart: React.FC = () => {
         //@ts-ignore
         series.setData(formattedData);
       }
-      setChart(chart);
+      setChartCreated(chart);
     } else if (chartCreated && !formattedData) {
-      if (ref.current) ref.current.innerHTML = '';
-      setChartCreated(false);
+      if (ref.current) ref.current.innerHTML = 'No Data Available';
+      setChartCreated(undefined);
     }
+    return () => {
+      chart?.remove();
+    };
   }, [formattedData]);
 
   // responsiveness
   useEffect(() => {
     if (WIDTH) {
-      chart && chart.resize(WIDTH, HEIGHT);
-      chart && chart.timeScale().scrollToPosition(0, true);
+      chartCreated && chartCreated.resize(WIDTH, HEIGHT);
+      chartCreated && chartCreated.timeScale().scrollToPosition(0, true);
     }
   }, [chartCreated, WIDTH, HEIGHT]);
 
   return (
-    <Box style={{ height: '100%', display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
-      <Box>
-        <Box>
-          <Text>{field.toUpperCase()}</Text>
-          <Text>{/* <span>{graphTimePeriod}</span> */}</Text>
-        </Box>
-      </Box>
+    <Box
+      minW={width}
+      minH={height}
+    >
       {formattedData && (
-        <>
-          <Box
-            ref={ref}
-            id={'chart '}
-          />
-        </>
+        <Box
+          ref={ref}
+          id={'chart'}
+        />
       )}
     </Box>
   );

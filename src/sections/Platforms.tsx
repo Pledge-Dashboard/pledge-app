@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import { SectionContainer } from '../layouts/SectionContainer';
 import { Box, Text, Grid, GridItem } from '@chakra-ui/react';
 import DataStoreContext from '../context/DataStore';
-import { DataSnapshotAll, PlatformData, PLATFORMS } from '../types';
+import { DataSnapshotAll, PLATFORMS } from '../types';
 
 const Platforms = () => {
   const { current } = useContext(DataStoreContext);
