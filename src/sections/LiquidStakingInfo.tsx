@@ -1,14 +1,18 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
 import { StakeInfoCard } from '../components/StakeInfoCard';
 import BlurCircle from '../components/BlurCircle';
+import { useContext } from 'react';
+import DataStoreContext from '../context/DataStore';
 
 export const LiquidStakingInfo = () => {
+  const { averageAPY } = useContext(DataStoreContext);
+
   return (
     <Box
       width={'full'}
       textAlign="center"
       minHeight={'95vh'}
-      id="LiquidStakingInfo"
+      id="LiquidStaking"
       as="section"
       padding={{ base: 8, md: 0 }}
     >
@@ -35,7 +39,7 @@ export const LiquidStakingInfo = () => {
           blur={100}
           opacity={1}
           position="absolute"
-          mixBlendMode={'color'}
+          mixBlendMode={'color-dodge'}
           left={0}
           transform="translate(-40%, -4rem)"
           w={{ base: '12rem', md: '24rem' }}
@@ -56,14 +60,14 @@ export const LiquidStakingInfo = () => {
           blur={100}
           opacity={1}
           position="absolute"
-          mixBlendMode={'color'}
+          bg={'bg.gradientBright'}
           right={0}
           transform="translate(30%, 6rem)"
           h={{ base: '12rem', md: '12rem' }}
         />
         <StakeInfoCard
           title="Returns!"
-          description="Get returns for staked MATIC!! Current Avg. APY: __%"
+          description={`Get returns for staked MATIC!! Current Avg. APY: ${averageAPY}%`}
           cardWidth={{ base: 'full', md: '50%', lg: '42.5%' }}
           textWidth={{ base: 'full', md: '75%', lg: '50%' }}
           alignment="flex-start"
