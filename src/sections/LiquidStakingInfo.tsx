@@ -63,7 +63,7 @@ export const LiquidStakingInfo = () => {
           bg={'bg.gradientBright'}
           right={0}
           transform="translate(30%, 6rem)"
-          h={{ base: '12rem', md: '12rem' }}
+          width={{ base: '10rem', md: '20rem' }}
         />
         <StakeInfoCard
           title="Returns!"
