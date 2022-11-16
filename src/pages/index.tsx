@@ -11,10 +11,10 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Translat3</title>
+        <title>Pledge - MATIC LSD Dashboard</title>
         <meta
           name="description"
-          content="The fastest way to localize your projects powered by Polygon"
+          content="Explore Liquid Staking Derivatives of MATIC"
         />
         <link
           rel="icon"
