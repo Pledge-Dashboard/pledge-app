@@ -1,7 +1,7 @@
-import { Box, Grid, Heading, Code } from '@chakra-ui/react';
+import { Box, Grid, Heading, Code, Button } from '@chakra-ui/react';
 import { useContext, useMemo } from 'react';
 import DataStoreContext, { defaultPlatformData } from '../context/DataStore';
-import { PlatformNames, PLATFORM_NAME, PLATFORM_TOKEN } from '../types';
+import { PlatformNames, PLATFORM_NAME, PLATFORM_TOKEN, PLATFORM_URI } from '../types';
 import { formattedNum } from '../utils/numberFormatter';
 
 const InfoContainer = ({ platform }: { platform: PlatformNames }) => {
@@ -31,6 +31,7 @@ const InfoContainer = ({ platform }: { platform: PlatformNames }) => {
       <Grid
         templateColumns="1fr 1fr"
         gridGap="4"
+        mb="4"
       >
         <Code
           bg="whiteAlpha.100"
@@ -38,7 +39,7 @@ const InfoContainer = ({ platform }: { platform: PlatformNames }) => {
           borderRadius="sm"
           fontSize="sm"
         >
-          APY: {data.apy || data.apr}
+          APY: {formattedNum(data.apy || data.apr)}
         </Code>
         <Code
           bg="whiteAlpha.100"
@@ -81,6 +82,17 @@ const InfoContainer = ({ platform }: { platform: PlatformNames }) => {
           {PLATFORM_TOKEN[platform]}/USD: {formattedNum(data.price)}
         </Code>
       </Grid>
+      <Button
+        as={'a'}
+        variant="outline"
+        borderRadius={0}
+        borderColor="#FF7878"
+        _hover={{ backgroundColor: '#FF787833' }}
+        href={PLATFORM_URI[platform]}
+        target="_blank"
+      >
+        Visit {platform[0].toUpperCase() + platform.slice(1)}
+      </Button>
     </Box>
   );
 };

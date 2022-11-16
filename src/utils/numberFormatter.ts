@@ -38,12 +38,12 @@ export const formattedNum = (number: any, usd = false) => {
 
   if (usd) {
     if (num < 0.1) {
-      return '' + Number(parseFloat(num.toString()).toFixed(4));
+      return '' + Number(parseFloat(num.toString()).toFixed(3));
     } else {
       const usdString = priceFormatter.format(num);
       return '' + usdString.slice(1, usdString.length);
     }
   }
 
-  return Number(parseFloat(num.toString()).toFixed(5));
+  return Number(parseFloat(num.toString()).toFixed(3));
 };

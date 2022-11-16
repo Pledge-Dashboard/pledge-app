@@ -22,7 +22,7 @@ const FieldButton: FC<FieldSwitcherProps & { fieldName: FieldNames; label: strin
       borderRadius="0"
       fontSize="sm"
     >
-      {label}
+      {label} {fieldName === field}
     </Button>
   );
 };
