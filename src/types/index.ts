@@ -2,12 +2,23 @@ export enum PLATFORMS {
   LIDO = 'lido',
   ANKR = 'ankr',
   STADER = 'stader',
-  CLAYSTACK = 'claystack',
   TENDERIZE = 'tenderize',
 }
+export const PLATFORM_URI = {
+  lido: 'https://polygon.lido.fi/',
+  ankr: 'https://www.ankr.com/staking/stake/matic/',
+  stader: 'https://polygon.staderlabs.com/liquid-staking/maticx?',
+  tenderize: 'https://app.tenderize.me/stakers/matic',
+};
+export const PLATFORM_TOKEN = {
+  lido: 'stMATIC',
+  ankr: 'aMATICb',
+  stader: 'MATICx',
+  tenderize: 'tMATIC',
+};
 
 // values of platforms enum
-export type PlatformNames = 'lido' | 'ankr' | 'stader' | 'claystack' | 'tenderize';
+export type PlatformNames = 'lido' | 'ankr' | 'stader' | 'tenderize';
 
 export type PlatformData = {
   priceMatic: number;
@@ -39,8 +50,8 @@ export type HistoryByPlatform = {
 
 export type DataStore = {
   current: DataSnapshotAll | undefined;
-  setCurrent: (current: DataSnapshotAll) => void;
   historical: Array<DataSnapshotAll> | undefined;
-  setHistorical: (historical: Array<DataSnapshotAll>) => void;
   historyByPlatform: HistoryByPlatform;
 };
+
+export type FieldNames = keyof PlatformDataSnapshot | 'totalStakedUSD';

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { createContext, FunctionComponent, PropsWithChildren, useEffect, useMemo, useState } from 'react';
+import { createContext, FunctionComponent, PropsWithChildren, useMemo } from 'react';
 import { DataSnapshotAll, DataStore, HistoryByPlatform, PlatformData, PlatformNames } from '../types';
+import useSWR from 'swr';
 
 const defaultPlatformData: PlatformData = {
   priceMatic: 0,
@@ -20,42 +21,32 @@ const DataStoreContext = createContext<DataStore>({
     lido: defaultPlatformData,
     ankr: defaultPlatformData,
     stader: defaultPlatformData,
-    claystack: defaultPlatformData,
+    // claystack: defaultPlatformData,
     tenderize: defaultPlatformData,
   },
-  setCurrent: () => {},
   historical: [],
-  setHistorical: () => {},
   historyByPlatform: {
     lido: [],
     ankr: [],
     stader: [],
-    claystack: [],
+    // claystack: [],
     tenderize: [],
   },
 });
 
-// const DataStoreProvider = DataStoreContext.Provider;
+const fetcher = (input: RequestInfo | URL, init?: RequestInit | undefined) =>
+  fetch(input, init).then((res) => res.json());
 
 const DataStoreProvider: FunctionComponent<PropsWithChildren> = ({ children }) => {
-  const [currentData, setCurrent] = useState<DataSnapshotAll | undefined>(undefined);
-  const [historical, setHistorical] = useState<Array<DataSnapshotAll> | undefined>(undefined);
-
-  useEffect(() => {
-    (async () => {
-      const currentResults = await fetch('/api/current/').then((response) => response.json());
-      const historicalResults = await fetch('/api/historical/').then((response) => response.json());
-      setCurrent(currentResults);
-      setHistorical(historicalResults);
-    })();
-  }, []);
+  const { data: currentData } = useSWR<DataSnapshotAll>('/api/current', fetcher);
+  const { data: historical } = useSWR<Array<DataSnapshotAll>>('/api/historical', fetcher);
 
   const historyByPlatform = useMemo<HistoryByPlatform>(() => {
     const defaultHistoryByPlatform: HistoryByPlatform = {
       lido: [],
       ankr: [],
       stader: [],
-      claystack: [],
+      // claystack: [],
       tenderize: [],
     };
 
@@ -65,7 +56,7 @@ const DataStoreProvider: FunctionComponent<PropsWithChildren> = ({ children }) =
       const platforms = Object.keys(platformsData) as PlatformNames[];
 
       platforms.forEach((platform: PlatformNames) => {
-        acc[platform].push({ _id, timestamp, ...platformsData[platform] });
+        acc[platform]?.push({ _id, timestamp, ...platformsData[platform] });
       });
 
       return acc;
@@ -78,9 +69,7 @@ const DataStoreProvider: FunctionComponent<PropsWithChildren> = ({ children }) =
     <DataStoreContext.Provider
       value={{
         current: currentData,
-        setCurrent: setCurrent,
         historical: historical,
-        setHistorical: setHistorical,
         historyByPlatform,
       }}
     >
