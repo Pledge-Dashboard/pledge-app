@@ -12,8 +12,13 @@ const PlatformButton = ({ setPlatform, platform, platformName }: PlatformSwitche
   return (
     <Button
       onClick={() => setPlatform(platformName ?? 'lido')}
-      colorScheme={platformName === platform ? 'blue' : 'gray'}
       variant="solid"
+      border="2px solid"
+      borderColor={platformName === platform ? '#ee0b7bdf' : 'whiteAlpha.400'}
+      bg={platformName === platform ? '#ee0b7b20' : 'whiteAlpha.200'}
+      _hover={{
+        bg: platformName === platform ? '#ee0b7b40' : 'whiteAlpha.500',
+      }}
       borderRadius="0"
     >
       {PLATFORM_NAME?.[platformName || 'lido']}
