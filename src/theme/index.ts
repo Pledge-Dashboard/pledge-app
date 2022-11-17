@@ -9,7 +9,8 @@ const config = {
 const colors = {
   bg: {
     main: '#151A2D',
-    gradient: 'radial-gradient(106.94% 682.55% at 0% 28.07%, #BE6BFF 16.75%, #FF7878 100%)',
+    gradient: 'radial-gradient(106.94% 682.55% at 0% 28%, #BE6BFF 16.75%, #FF7878 100%)',
+    gradientBright: 'radial-gradient(106.94% 682.55% at 0% 0%, #2816FF 16.75%, #FF096E 100%)',
     translucent: '#D9D9D91A',
   },
   text: {

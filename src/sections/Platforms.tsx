@@ -1,8 +1,18 @@
+import { useContext, useEffect } from 'react';
 import { SectionContainer } from '../layouts/SectionContainer';
-import { Text, Grid, GridItem } from '@chakra-ui/react';
-import { PLATFORMS } from '../context/DataStore';
+import { Box, Text, Grid, GridItem } from '@chakra-ui/react';
+import DataStoreContext from '../context/DataStore';
+import { DataSnapshotAll, PLATFORMS } from '../types';
 
 const Platforms = () => {
+  const { current } = useContext(DataStoreContext);
+  useEffect(() => {
+    Object.keys(PLATFORMS).map((platform) => {
+      const platformData = current?.[platform.toLowerCase() as keyof DataSnapshotAll];
+      console.log(platformData?.toString());
+    });
+  }, [current]);
+
   return (
     <SectionContainer
       id="platforms"
@@ -35,6 +45,25 @@ const Platforms = () => {
               textAlign="center"
             >
               <Text fontSize={{ base: 'md', md: 'lg' }}>{item}</Text>
+              <Box
+                h="1px"
+                w={'100%'}
+                mt={4}
+                bgColor={'bg.translucent'}
+                mb={4}
+              />
+              <Box textAlign={'left'}>
+                <Text
+                  fontSize={{ base: 'xs', md: 'sm' }}
+                  as="span"
+                >
+                  APY
+                </Text>
+                <Text
+                  fontSize={{ base: 'sm', md: 'md' }}
+                  as="span"
+                ></Text>
+              </Box>
             </GridItem>
           ))}
         </Grid>

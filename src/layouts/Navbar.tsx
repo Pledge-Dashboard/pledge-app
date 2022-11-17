@@ -1,4 +1,4 @@
-import { Box, Flex, Text, chakra, Image, Spacer, Link } from '@chakra-ui/react';
+import { Box, Flex, Text, chakra, Image, Spacer } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { NavLink } from '../components/NavLink';
 import { SideDrawer } from './SideDrawer';

@@ -1,6 +1,10 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
+import { useContext, useMemo } from 'react';
+import DataStoreContext from '../context/DataStore';
 
 export const LandingWidget = () => {
+  const { totalStaked, averageAPY } = useContext(DataStoreContext);
+
   return (
     <Flex
       borderBottom={'1px solid bg.gradient'}
@@ -16,9 +20,9 @@ export const LandingWidget = () => {
           bg="bg.gradient"
           backgroundClip="text"
         >
-          21.34M
+          {totalStaked}
         </Text>
-        <Text fontSize={{ base: 'sm', md: 'lg', lg: 'xl' }}>Stacked</Text>
+        <Text fontSize={{ base: 'sm', md: 'lg', lg: 'xl' }}>Staked</Text>
       </Box>
       <Box textAlign={'center'}>
         <Text
@@ -38,7 +42,7 @@ export const LandingWidget = () => {
           bg="bg.gradient"
           backgroundClip="text"
         >
-          21%
+          {averageAPY}
         </Text>
         <Text fontSize={{ base: 'sm', md: 'lg', lg: 'xl' }}>Average APY</Text>
       </Box>

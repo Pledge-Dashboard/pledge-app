@@ -11,7 +11,6 @@ const BlurCircle: FC<ChakraProps> = ({ blur, opacity = '0.25', width = '96', ...
       borderRadius="50%"
       bg="bg.gradient"
       zIndex={-1}
-      mixBlendMode="color"
       {...props}
     />
   );
