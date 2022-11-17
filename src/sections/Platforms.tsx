@@ -1,8 +1,8 @@
-import { useContext, useEffect, useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import { SectionContainer } from '../layouts/SectionContainer';
-import { Box, Text, Grid, GridItem } from '@chakra-ui/react';
+import { Box, Text, Grid, GridItem, Button } from '@chakra-ui/react';
 import DataStoreContext from '../context/DataStore';
-import { DataSnapshotAll, PlatformData, PlatformNames, PLATFORMS } from '../types';
+import { PLATFORM_URI, PlatformData, PlatformNames, PLATFORMS } from '../types';
 import { formattedNum } from '../utils/numberFormatter';
 
 interface Data {
@@ -54,7 +54,7 @@ const Platforms = () => {
             <GridItem
               key={index}
               w="16rem"
-              h="12rem"
+              h="14rem"
               bg="bg.translucent"
               borderRadius="xl"
               p={4}
@@ -110,6 +110,26 @@ const Platforms = () => {
                 >
                   {formattedNum(platformData[item.toLowerCase()].totalStaked?.usd)}
                 </Text>
+              </Box>
+              <Box
+                mt={8}
+                textAlign={'center'}
+              >
+                <a
+                  href={PLATFORM_URI[item.toLowerCase() as PlatformNames]}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Button
+                    fontSize={{ base: 'xs', md: 'sm' }}
+                    as="span"
+                    size={'sm'}
+                    variant="solid"
+                    colorScheme={'pink'}
+                  >
+                    Stake Now
+                  </Button>
+                </a>
               </Box>
             </GridItem>
           ))}
