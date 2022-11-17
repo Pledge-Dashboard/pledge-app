@@ -3,9 +3,9 @@ import { FC } from 'react';
 import { PlatformNames, PLATFORM_NAME } from '../types';
 
 interface PlatformSwitcherProps {
-  platform: PlatformNames;
-  setPlatform: (field: PlatformNames) => void;
-  platformName?: PlatformNames;
+  platform: PlatformNames | 'all';
+  setPlatform: (field: PlatformNames | 'all') => void;
+  platformName?: PlatformNames | 'all';
 }
 
 const PlatformButton = ({ setPlatform, platform, platformName }: PlatformSwitcherProps) => {
@@ -16,7 +16,7 @@ const PlatformButton = ({ setPlatform, platform, platformName }: PlatformSwitche
       variant="solid"
       borderRadius="0"
     >
-      {PLATFORM_NAME[platformName || 'lido']}
+      {PLATFORM_NAME?.[platformName || 'lido']}
     </Button>
   );
 };
@@ -28,6 +28,11 @@ const PlatformSwitcher: FC<PlatformSwitcherProps> = ({ platform, setPlatform }) 
       mb="8"
       w="full"
     >
+      <PlatformButton
+        platformName="all"
+        platform={platform}
+        setPlatform={setPlatform}
+      />
       <PlatformButton
         platformName="lido"
         platform={platform}

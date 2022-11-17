@@ -27,13 +27,15 @@ const FieldButton: FC<FieldSwitcherProps & { fieldName: FieldNames; label: strin
   );
 };
 
-const FieldSwitcher: FC<FieldSwitcherProps & { platform: PlatformNames }> = ({ field, setField, platform }) => {
+const FieldSwitcher: FC<FieldSwitcherProps & { platform: PlatformNames | 'all' }> = ({ field, setField, platform }) => {
   const { current } = useContext(DataStoreContext);
   useEffect(() => {
-    if (field === 'apy' && !current?.[platform].apy) {
-      setField('apr');
-    } else if (field === 'apr' && !current?.[platform].apr) {
-      setField('apy');
+    if (platform !== 'all') {
+      if (field === 'apy' && !current?.[platform].apy) {
+        setField('apr');
+      } else if (field === 'apr' && !current?.[platform].apr) {
+        setField('apy');
+      }
     }
   }, [current, platform, setField]);
   return (
@@ -57,23 +59,27 @@ const FieldSwitcher: FC<FieldSwitcherProps & { platform: PlatformNames }> = ({ f
         setField={setField}
       />
       <FieldButton
-        fieldName="priceMatic"
-        label={`Price (${PLATFORM_TOKEN[platform]}/MATIC)`}
-        field={field}
-        setField={setField}
-      />
-      <FieldButton
         fieldName="stakers"
         label="Stakers"
         field={field}
         setField={setField}
       />
-      <FieldButton
-        fieldName={current?.[platform].apy ? 'apy' : 'apr'}
-        label={current?.[platform].apy ? 'APY' : 'APR'}
-        field={field}
-        setField={setField}
-      />
+      {platform !== 'all' && (
+        <>
+          <FieldButton
+            fieldName="priceMatic"
+            label={`Price (${PLATFORM_TOKEN[platform]}/MATIC)`}
+            field={field}
+            setField={setField}
+          />
+          <FieldButton
+            fieldName={current?.[platform].apy?.toString() ? 'apy' : 'apr'}
+            label={current?.[platform]?.apy?.toString() ? 'APY' : 'APR'}
+            field={field}
+            setField={setField}
+          />
+        </>
+      )}
     </Flex>
   );
 };

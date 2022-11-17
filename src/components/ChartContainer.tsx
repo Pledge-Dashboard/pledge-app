@@ -1,6 +1,6 @@
 import { Box, Flex, useMediaQuery } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FieldSwitcher from '../components/FieldSwitcher';
 import { FieldNames, PlatformNames } from '../types';
 import PlatformSwitcher from './PlatformSwitcher';
@@ -12,8 +12,8 @@ const ChartContainer = ({
   platform,
   setPlatform,
 }: {
-  platform: PlatformNames;
-  setPlatform: (platform: PlatformNames) => void;
+  platform: PlatformNames | 'all';
+  setPlatform: (platform: PlatformNames | 'all') => void;
 }) => {
   const [isLargerThan1200] = useMediaQuery('(min-width: 1200px)', {
     ssr: true,
@@ -23,12 +23,13 @@ const ChartContainer = ({
     ssr: true,
     fallback: false, // return false on the server, and re-evaluate on the client side
   });
-  const [isLargerThan500] = useMediaQuery('(min-width: 500px)', {
-    ssr: true,
-    fallback: false, // return false on the server, and re-evaluate on the client side
-  });
 
   const [field, setField] = useState<FieldNames>('price');
+  useEffect(() => {
+    if (platform === 'all') {
+      setField('totalStaked');
+    }
+  }, [platform]);
 
   return (
     <Flex

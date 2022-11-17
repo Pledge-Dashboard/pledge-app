@@ -21,15 +21,16 @@ export const PLATFORM_NAME = {
   ankr: 'Ankr',
   stader: 'Stader',
   tenderize: 'Tenderize',
+  all: 'All',
 };
 
 // values of platforms enum
 export type PlatformNames = 'lido' | 'ankr' | 'stader' | 'tenderize';
 
 export type PlatformData = {
-  priceMatic: number;
-  price: number;
-  apy: string;
+  priceMatic?: number;
+  price?: number;
+  apy?: string;
   apr?: string;
   stakers: string;
   totalStaked: {
@@ -51,12 +52,41 @@ export interface DataSnapshotAll extends Data {
   timestamp: string;
 }
 
+export interface AggregatedData {
+  all: {
+    stakers: string;
+
+    totalStaked: {
+      matic: string;
+      usd: string;
+    };
+  };
+}
+
+export interface AggregatedDataHistorical {
+  all: Array<{
+    stakers: string;
+    _id: string;
+    timestamp: string;
+    totalStaked: {
+      matic: string;
+      usd: string;
+    };
+    apy?: undefined;
+    apr?: undefined;
+    priceMatic?: undefined;
+    price?: undefined;
+  }>;
+}
+
 export type HistoryByPlatform = {
   [key in PLATFORMS]: Array<PlatformDataSnapshot>;
-};
+} & AggregatedDataHistorical;
+
+// export interface CurrentData extends DataSnapshotAll, AggregatedData {}
 
 export type DataStore = {
-  current: DataSnapshotAll | undefined;
+  current: (DataSnapshotAll & AggregatedData) | undefined;
   historical: Array<DataSnapshotAll> | undefined;
   historyByPlatform: HistoryByPlatform;
   averageAPY: string;

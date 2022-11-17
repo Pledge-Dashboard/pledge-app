@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Box } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import { createChart, IChartApi, ISeriesApi } from 'lightweight-charts';
@@ -28,7 +28,7 @@ const GenericChart: React.FC<{
   width: number;
   height: number;
   field: FieldNames;
-  platform: PlatformNames;
+  platform: PlatformNames | 'all';
 }> = ({ width, height, field, platform }) => {
   const { historyByPlatform } = useContext(DataStoreContext);
   // const [value, setValue] = useState<number>(0);
@@ -54,7 +54,7 @@ const GenericChart: React.FC<{
         ...item,
         totalStaked: item.totalStaked.matic,
         totalStakedUSD: item.totalStaked.usd,
-        apr: item.apr,
+        apr: item?.apr,
         timestamp: Number((new Date(item.timestamp).getTime() / 1000).toFixed(0)),
       };
     });
@@ -66,16 +66,24 @@ const GenericChart: React.FC<{
 
   const [chartCreated, setChartCreated] = useState<IChartApi | undefined>(undefined);
 
-  const formattedData = useMemo(
-    () =>
-      data.map((entry) => {
-        return {
+  const formattedData = useMemo(() => {
+    // data.map((entry) => {
+    //   return {
+    //     time: entry.timestamp,
+    //     value: entry[field] ? parseFloat(String(entry[field])).toString() : 0,
+    //   };
+    // })
+    const formattedData = [];
+    for (const entry of data) {
+      if (entry[field]) {
+        formattedData.push({
           time: entry.timestamp,
-          value: parseFloat(String(entry[field])).toString(),
-        };
-      }),
-    [data, field]
-  );
+          value: entry[field] ? parseFloat(String(entry[field])).toString() : 0,
+        });
+      }
+    }
+    return formattedData;
+  }, [data, field]);
 
   // adjust the scale based on the type of chart
   const topScale = 0.32;
@@ -155,7 +163,7 @@ const GenericChart: React.FC<{
       }
       setChartCreated(chart);
     } else if (chartCreated && formattedData.length < 2) {
-      if (ref.current) ref.current.innerHTML = 'Data Loading';
+      if (ref.current) ref.current.innerHTML = 'Data Unavailable';
       setChartCreated(undefined);
     }
     return () => {
@@ -176,11 +184,22 @@ const GenericChart: React.FC<{
       w={width}
       h={height}
     >
-      {formattedData && (
+      {formattedData?.length > 2 ? (
         <Box
           ref={ref}
           id={'chart'}
         />
+      ) : (
+        <Flex
+          w="full"
+          h="full"
+          align="center"
+          justify="center"
+          borderRadius="md"
+          bg="whiteAlpha.200"
+        >
+          Data Unavailable
+        </Flex>
       )}
     </Box>
   );
