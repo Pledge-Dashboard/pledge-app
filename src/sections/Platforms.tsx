@@ -1,16 +1,32 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import { SectionContainer } from '../layouts/SectionContainer';
 import { Box, Text, Grid, GridItem } from '@chakra-ui/react';
 import DataStoreContext from '../context/DataStore';
-import { DataSnapshotAll, PLATFORMS } from '../types';
+import { DataSnapshotAll, PlatformData, PlatformNames, PLATFORMS } from '../types';
+import { formattedNum } from '../utils/numberFormatter';
+
+interface Data {
+  [key: string]: PlatformData;
+}
 
 const Platforms = () => {
   const { current } = useContext(DataStoreContext);
-  useEffect(() => {
-    Object.keys(PLATFORMS).map((platform) => {
-      const platformData = current?.[platform.toLowerCase() as keyof DataSnapshotAll];
-      console.log(platformData?.toString());
-    });
+  const platforms: PlatformNames[] = Object.keys(PLATFORMS).map((key) => key.toLowerCase() as PlatformNames);
+  const platformData = useMemo<Data>(() => {
+    const data: Data = {};
+    for (const platform of platforms) {
+      data[platform] = current?.[platform] ?? {
+        priceMatic: 0,
+        price: 0,
+        apr: '0',
+        stakers: '0',
+        totalStaked: {
+          matic: '0',
+          usd: '0',
+        },
+      };
+    }
+    return data;
   }, [current]);
 
   return (
@@ -52,17 +68,48 @@ const Platforms = () => {
                 bgColor={'bg.translucent'}
                 mb={4}
               />
-              <Box textAlign={'left'}>
+              <Box
+                textAlign={'left'}
+                px={2}
+              >
                 <Text
                   fontSize={{ base: 'xs', md: 'sm' }}
                   as="span"
+                  mr={4}
                 >
-                  APY
+                  {platformData[item.toLowerCase()].apy ? 'APY' : 'APR'}
                 </Text>
                 <Text
-                  fontSize={{ base: 'sm', md: 'md' }}
+                  fontSize={{ base: 'lg', md: 'xl' }}
                   as="span"
-                ></Text>
+                  bg="bg.gradient"
+                  backgroundClip="text"
+                >
+                  {platformData[item.toLowerCase()].apy?.substring(0, 4) ||
+                    platformData[item.toLowerCase()].apr?.substring(0, 4)}
+                  %
+                </Text>
+              </Box>
+              <Box
+                textAlign={'left'}
+                px={2}
+                mt={2}
+              >
+                <Text
+                  fontSize={{ base: 'xs', md: 'sm' }}
+                  as="span"
+                  mr={4}
+                >
+                  TVL
+                </Text>
+                <Text
+                  fontSize={{ base: 'lg', md: 'xl' }}
+                  as="span"
+                  bg="bg.gradient"
+                  backgroundClip="text"
+                >
+                  {formattedNum(platformData[item.toLowerCase()].totalStaked?.usd)}
+                </Text>
               </Box>
             </GridItem>
           ))}
