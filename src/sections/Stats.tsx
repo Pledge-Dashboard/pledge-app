@@ -6,7 +6,7 @@ import { SectionContainer } from '../layouts/SectionContainer';
 import { PlatformNames } from '../types';
 
 export const Stats = () => {
-  const [platform, setPlatform] = useState<PlatformNames>('ankr');
+  const [platform, setPlatform] = useState<PlatformNames | 'all'>('all');
   return (
     <SectionContainer
       id="Statistics"

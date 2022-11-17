@@ -1,12 +1,12 @@
 import { Box, Grid, Heading, Code, Button } from '@chakra-ui/react';
 import { useContext, useMemo } from 'react';
 import DataStoreContext, { defaultPlatformData } from '../context/DataStore';
-import { PlatformNames, PLATFORM_NAME, PLATFORM_TOKEN, PLATFORM_URI } from '../types';
+import { PlatformData, PlatformNames, PLATFORM_NAME, PLATFORM_TOKEN, PLATFORM_URI } from '../types';
 import { formattedNum } from '../utils/numberFormatter';
 
-const InfoContainer = ({ platform }: { platform: PlatformNames }) => {
+const InfoContainer = ({ platform }: { platform: PlatformNames | 'all' }) => {
   const { current } = useContext(DataStoreContext);
-  const data = useMemo(() => {
+  const data = useMemo<PlatformData>(() => {
     return current?.[platform] ?? defaultPlatformData;
   }, [current, platform]);
 
@@ -33,15 +33,38 @@ const InfoContainer = ({ platform }: { platform: PlatformNames }) => {
         gridGap="4"
         mb="4"
       >
-        <Code
-          fontWeight="bold"
-          bg="whiteAlpha.100"
-          p="1rem"
-          borderRadius="sm"
-          fontSize="sm"
-        >
-          APY: {formattedNum(data.apy || data.apr)}%
-        </Code>
+        {platform !== 'all' && (
+          <>
+            <Code
+              fontWeight="bold"
+              bg="whiteAlpha.100"
+              p="1rem"
+              borderRadius="sm"
+              fontSize="sm"
+            >
+              APY: {formattedNum(data.apy || data.apr)}%
+            </Code>
+
+            <Code
+              fontWeight="bold"
+              bg="whiteAlpha.100"
+              p="1rem"
+              borderRadius="sm"
+              fontSize="sm"
+            >
+              {PLATFORM_TOKEN[platform]}/MATIC: {formattedNum(data.priceMatic)}
+            </Code>
+            <Code
+              fontWeight="bold"
+              bg="whiteAlpha.100"
+              p="1rem"
+              borderRadius="sm"
+              fontSize="sm"
+            >
+              {PLATFORM_TOKEN[platform]}/USD: {formattedNum(data.price)}
+            </Code>
+          </>
+        )}
         <Code
           fontWeight="bold"
           bg="whiteAlpha.100"
@@ -58,7 +81,7 @@ const InfoContainer = ({ platform }: { platform: PlatformNames }) => {
           borderRadius="sm"
           fontSize="sm"
         >
-          TVL: {formattedNum(data.totalStaked.usd)}
+          TVL (USD): ${formattedNum(data.totalStaked.usd)}
         </Code>
         <Code
           fontWeight="bold"
@@ -69,36 +92,22 @@ const InfoContainer = ({ platform }: { platform: PlatformNames }) => {
         >
           MATIC Staked: {formattedNum(data.totalStaked.matic)}
         </Code>
-        <Code
-          fontWeight="bold"
-          bg="whiteAlpha.100"
-          p="1rem"
-          borderRadius="sm"
-          fontSize="sm"
-        >
-          {PLATFORM_TOKEN[platform]}/MATIC: {formattedNum(data.priceMatic)}
-        </Code>
-        <Code
-          fontWeight="bold"
-          bg="whiteAlpha.100"
-          p="1rem"
-          borderRadius="sm"
-          fontSize="sm"
-        >
-          {PLATFORM_TOKEN[platform]}/USD: {formattedNum(data.price)}
-        </Code>
       </Grid>
-      <Button
-        as={'a'}
-        variant="outline"
-        borderRadius={0}
-        borderColor="#FF7878"
-        _hover={{ backgroundColor: '#FF787833' }}
-        href={PLATFORM_URI[platform]}
-        target="_blank"
-      >
-        Visit {platform[0].toUpperCase() + platform.slice(1)}
-      </Button>
+      {platform !== 'all' ? (
+        <Button
+          as={'a'}
+          variant="outline"
+          borderRadius={0}
+          borderColor="#FF7878"
+          _hover={{ backgroundColor: '#FF787833' }}
+          href={PLATFORM_URI[platform]}
+          target="_blank"
+        >
+          Open {platform[0].toUpperCase() + platform.slice(1)}
+        </Button>
+      ) : (
+        <></>
+      )}
     </Box>
   );
 };

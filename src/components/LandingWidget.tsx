@@ -1,6 +1,7 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
 import { useContext, useMemo } from 'react';
 import DataStoreContext from '../context/DataStore';
+import { formattedNum } from '../utils/numberFormatter';
 
 export const LandingWidget = () => {
   const { totalStaked, averageAPY } = useContext(DataStoreContext);
@@ -20,7 +21,7 @@ export const LandingWidget = () => {
           bg="bg.gradient"
           backgroundClip="text"
         >
-          {totalStaked}
+          {formattedNum(totalStaked)}
         </Text>
         <Text fontSize={{ base: 'sm', md: 'lg', lg: 'xl' }}>Staked</Text>
       </Box>
@@ -42,7 +43,7 @@ export const LandingWidget = () => {
           bg="bg.gradient"
           backgroundClip="text"
         >
-          {averageAPY}
+          {formattedNum(averageAPY)}%
         </Text>
         <Text fontSize={{ base: 'sm', md: 'lg', lg: 'xl' }}>Average APY</Text>
       </Box>
