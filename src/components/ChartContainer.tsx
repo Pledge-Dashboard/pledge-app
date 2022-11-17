@@ -63,7 +63,7 @@ const ChartContainer = ({
             platform={platform}
             field={field}
             width={isLargerThan1000 ? (isLargerThan1200 ? 600 : 400) : 300}
-            height={isLargerThan500 ? 500 : 300}
+            height={isLargerThan1000 ? 400 : 300}
           />
         </Box>
       </Flex>
