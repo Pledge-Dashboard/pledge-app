@@ -1,5 +1,5 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
-import { useContext, useMemo } from 'react';
+import { useContext } from 'react';
 import DataStoreContext from '../context/DataStore';
 import { formattedNum } from '../utils/numberFormatter';
 
@@ -23,7 +23,7 @@ export const LandingWidget = () => {
         >
           {formattedNum(totalStaked)}
         </Text>
-        <Text fontSize={{ base: 'sm', md: 'lg', lg: 'xl' }}>Staked</Text>
+        <Text fontSize={{ base: 'sm', md: 'lg', lg: 'xl' }}>Staked MATIC</Text>
       </Box>
       <Box textAlign={'center'}>
         <Text
