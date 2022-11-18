@@ -42,11 +42,11 @@ export default class Document extends NextDocument {
           />
           <meta
             property="og:image"
-            content="https://pledge-dashboard.vercel.com/screenshot.png"
+            content="https://pledge-dashboard.vercel.app/screenshot.png"
           />
           <meta
             property="og:url"
-            content="https://pledge-dashboard.vercel.com"
+            content="https://pledge-dashboard.vercel.app"
           />
         </Head>
         <body>
