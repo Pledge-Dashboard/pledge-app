@@ -1,10 +1,10 @@
-import { Box, Flex, Text } from '@chakra-ui/react';
-import { useContext } from 'react';
+import { Box, Flex, Skeleton, Text } from '@chakra-ui/react';
+import { FC, useContext } from 'react';
 import DataStoreContext from '../context/DataStore';
 import { formattedNum } from '../utils/numberFormatter';
 
-export const LandingWidget = () => {
-  const { totalStaked, averageAPY } = useContext(DataStoreContext);
+const LandingWidget: FC = () => {
+  const { totalStaked, averageAPY, isCurrentDataLoading } = useContext(DataStoreContext);
 
   return (
     <Flex
@@ -21,7 +21,15 @@ export const LandingWidget = () => {
           bg="bg.gradient"
           backgroundClip="text"
         >
-          {formattedNum(totalStaked)}
+          {isCurrentDataLoading ? (
+            <Skeleton
+              mb="4"
+              mt="2"
+              height="30px"
+            />
+          ) : (
+            formattedNum(totalStaked)
+          )}
         </Text>
         <Text fontSize={{ base: 'sm', md: 'lg', lg: 'xl' }}>Staked MATIC</Text>
       </Box>
@@ -32,7 +40,15 @@ export const LandingWidget = () => {
           bg="bg.gradient"
           backgroundClip="text"
         >
-          5+
+          {isCurrentDataLoading ? (
+            <Skeleton
+              mb="4"
+              mt="2"
+              height="30px"
+            />
+          ) : (
+            '5+'
+          )}
         </Text>
         <Text fontSize={{ base: 'sm', md: 'lg', lg: 'xl' }}>Derivative Platforms</Text>
       </Box>
@@ -43,10 +59,20 @@ export const LandingWidget = () => {
           bg="bg.gradient"
           backgroundClip="text"
         >
-          {formattedNum(averageAPY)}%
+          {isCurrentDataLoading ? (
+            <Skeleton
+              mb="4"
+              mt="2"
+              height="30px"
+            />
+          ) : (
+            `${formattedNum(averageAPY)}%`
+          )}
         </Text>
         <Text fontSize={{ base: 'sm', md: 'lg', lg: 'xl' }}>Average APY</Text>
       </Box>
     </Flex>
   );
 };
+
+export default LandingWidget;

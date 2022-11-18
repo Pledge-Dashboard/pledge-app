@@ -31,7 +31,7 @@ const Platforms = () => {
 
   return (
     <SectionContainer
-      id="platforms"
+      id="Platforms"
       title="here!"
     >
       <>

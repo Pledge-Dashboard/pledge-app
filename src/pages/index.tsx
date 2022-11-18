@@ -73,8 +73,8 @@ export default function Home() {
 
           <Landing />
           <Stats />
-          <LiquidStakingInfo />
           <Platforms />
+          <LiquidStakingInfo />
         </Box>
       </main>
     </div>

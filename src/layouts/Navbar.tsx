@@ -58,12 +58,12 @@ export const Navbar = () => {
             displayString="Statistics"
           />
           <NavLink
-            href="/#LiquidStaking"
-            displayString="Liquid Staking"
-          />
-          <NavLink
             href="/#Platforms"
             displayString="Platforms"
+          />
+          <NavLink
+            href="/#LiquidStaking"
+            displayString="Liquid Staking"
           />
         </Flex>
         <Box display={{ base: 'block', md: 'none' }}>

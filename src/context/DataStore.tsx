@@ -45,6 +45,8 @@ const DataStoreContext = createContext<DataStore>({
   },
   averageAPY: '0',
   totalStaked: '0',
+  isCurrentDataLoading: true,
+  isHistoricalDataLoading: true,
 });
 
 const fetcher = (input: RequestInfo | URL, init?: RequestInit | undefined) =>
@@ -170,6 +172,8 @@ const DataStoreProvider: FunctionComponent<PropsWithChildren> = ({ children }) =
         historyByPlatform,
         averageAPY,
         totalStaked,
+        isCurrentDataLoading: !fetchedCurrentData,
+        isHistoricalDataLoading: !historical,
       }}
     >
       {children}
