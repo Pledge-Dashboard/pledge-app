@@ -39,7 +39,7 @@ const ChartContainer = ({
     <Flex
       id="chart-container"
       w={{ base: '100%', lg: '60%', xl: '60%' }}
-      my="5rem"
+      my={{ base: '0', lg: '5rem' }}
       maxH="60rem"
       bg="#242C4D"
       p={{ base: '2rem', xl: '3rem 11rem 3rem 2rem' }}
