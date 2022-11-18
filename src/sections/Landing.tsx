@@ -1,16 +1,22 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Button, Flex, Text } from '@chakra-ui/react';
 import BlurCircle from '../components/BlurCircle';
-import { LandingWidget } from '../components/LandingWidget';
+// import { LandingWidget } from '../components/LandingWidget';
+import dynamic from 'next/dynamic';
+
+const LandingWidget = dynamic(() => import('../components/LandingWidget'), {
+  ssr: false,
+});
 
 export const Landing = () => {
   return (
     <Flex
-      h="100vh"
+      h="calc(100vh - 8rem)"
       id="Landing"
       as="section"
       w="full"
       alignItems={'center'}
       justifyContent={'center'}
+      mt="28"
       flexDir={'column'}
     >
       <BlurCircle
@@ -39,12 +45,21 @@ export const Landing = () => {
       >
         Liquid Staking Derivates on Polygon PoS
       </Text>
-      <Text
-        fontSize={{ md: 'lg', lg: 'xl' }}
-        mb={32}
+
+      <Button
+        as={'a'}
+        variant="outline"
+        borderRadius={0}
+        borderColor="#FF7878"
+        bgColor={'#FF787823'}
+        _hover={{ backgroundColor: '#FF787833' }}
+        mt="12"
+        mb="20"
+        href={'#Statistics'}
       >
-        Adding Security & Flexibility
-      </Text>
+        Explore Now!!
+      </Button>
+
       <LandingWidget />
     </Flex>
   );

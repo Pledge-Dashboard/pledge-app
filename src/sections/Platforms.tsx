@@ -1,21 +1,37 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useMemo } from 'react';
 import { SectionContainer } from '../layouts/SectionContainer';
-import { Box, Text, Grid, GridItem } from '@chakra-ui/react';
+import { Box, Text, Grid, GridItem, Button } from '@chakra-ui/react';
 import DataStoreContext from '../context/DataStore';
-import { DataSnapshotAll, PLATFORMS } from '../types';
+import { PLATFORM_URI, PlatformData, PlatformNames, PLATFORMS } from '../types';
+import { formattedNum } from '../utils/numberFormatter';
+
+interface Data {
+  [key: string]: PlatformData;
+}
 
 const Platforms = () => {
   const { current } = useContext(DataStoreContext);
-  useEffect(() => {
-    Object.keys(PLATFORMS).map((platform) => {
-      const platformData = current?.[platform.toLowerCase() as keyof DataSnapshotAll];
-      console.log(platformData?.toString());
-    });
+  const platforms: PlatformNames[] = Object.keys(PLATFORMS).map((key) => key.toLowerCase() as PlatformNames);
+  const platformData = useMemo<Data>(() => {
+    const data: Data = {};
+    for (const platform of platforms) {
+      data[platform] = current?.[platform] ?? {
+        priceMatic: 0,
+        price: 0,
+        apr: '0',
+        stakers: '0',
+        totalStaked: {
+          matic: '0',
+          usd: '0',
+        },
+      };
+    }
+    return data;
   }, [current]);
 
   return (
     <SectionContainer
-      id="platforms"
+      id="Platforms"
       title="here!"
     >
       <>
@@ -38,7 +54,7 @@ const Platforms = () => {
             <GridItem
               key={index}
               w="16rem"
-              h="12rem"
+              h="14rem"
               bg="bg.translucent"
               borderRadius="xl"
               p={4}
@@ -52,17 +68,68 @@ const Platforms = () => {
                 bgColor={'bg.translucent'}
                 mb={4}
               />
-              <Box textAlign={'left'}>
+              <Box
+                textAlign={'left'}
+                px={2}
+              >
                 <Text
                   fontSize={{ base: 'xs', md: 'sm' }}
                   as="span"
+                  mr={4}
                 >
-                  APY
+                  {platformData[item.toLowerCase()].apy ? 'APY' : 'APR'}
                 </Text>
                 <Text
-                  fontSize={{ base: 'sm', md: 'md' }}
+                  fontSize={{ base: 'lg', md: 'xl' }}
                   as="span"
-                ></Text>
+                  bg="bg.gradient"
+                  backgroundClip="text"
+                >
+                  {platformData[item.toLowerCase()].apy?.substring(0, 4) ||
+                    platformData[item.toLowerCase()].apr?.substring(0, 4)}
+                  %
+                </Text>
+              </Box>
+              <Box
+                textAlign={'left'}
+                px={2}
+                mt={2}
+              >
+                <Text
+                  fontSize={{ base: 'xs', md: 'sm' }}
+                  as="span"
+                  mr={4}
+                >
+                  TVL
+                </Text>
+                <Text
+                  fontSize={{ base: 'lg', md: 'xl' }}
+                  as="span"
+                  bg="bg.gradient"
+                  backgroundClip="text"
+                >
+                  {formattedNum(platformData[item.toLowerCase()].totalStaked?.usd)}
+                </Text>
+              </Box>
+              <Box
+                mt={8}
+                textAlign={'center'}
+              >
+                <a
+                  href={PLATFORM_URI[item.toLowerCase() as PlatformNames]}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Button
+                    fontSize={{ base: 'xs', md: 'sm' }}
+                    as="span"
+                    size={'sm'}
+                    variant="solid"
+                    colorScheme={'pink'}
+                  >
+                    Stake Now
+                  </Button>
+                </a>
               </Box>
             </GridItem>
           ))}

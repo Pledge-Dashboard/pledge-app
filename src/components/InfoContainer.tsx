@@ -4,6 +4,33 @@ import DataStoreContext, { defaultPlatformData } from '../context/DataStore';
 import { PlatformData, PlatformNames, PLATFORM_NAME, PLATFORM_TOKEN, PLATFORM_URI } from '../types';
 import { formattedNum } from '../utils/numberFormatter';
 
+const InfoCell = ({ label, value }: { label: string; value: string | number }) => {
+  return (
+    <Box
+      bg="whiteAlpha.100"
+      borderRadius="sm"
+    >
+      <Code
+        fontWeight="bold"
+        bg="transparent"
+        p="1rem"
+        borderRadius="sm"
+        fontSize="sm"
+      >
+        {label}:
+      </Code>
+      <Code
+        fontWeight="bold"
+        bg="transparent"
+        color="pink.400"
+        fontSize="lg"
+      >
+        {value}
+      </Code>
+    </Box>
+  );
+};
+
 const InfoContainer = ({ platform }: { platform: PlatformNames | 'all' }) => {
   const { current } = useContext(DataStoreContext);
   const data = useMemo<PlatformData>(() => {
@@ -35,63 +62,33 @@ const InfoContainer = ({ platform }: { platform: PlatformNames | 'all' }) => {
       >
         {platform !== 'all' && (
           <>
-            <Code
-              fontWeight="bold"
-              bg="whiteAlpha.100"
-              p="1rem"
-              borderRadius="sm"
-              fontSize="sm"
-            >
-              APY: {formattedNum(data.apy || data.apr)}%
-            </Code>
+            <InfoCell
+              label="APY"
+              value={`${formattedNum(data.apy || data.apr)}%`}
+            />
 
-            <Code
-              fontWeight="bold"
-              bg="whiteAlpha.100"
-              p="1rem"
-              borderRadius="sm"
-              fontSize="sm"
-            >
-              {PLATFORM_TOKEN[platform]}/MATIC: {formattedNum(data.priceMatic)}
-            </Code>
-            <Code
-              fontWeight="bold"
-              bg="whiteAlpha.100"
-              p="1rem"
-              borderRadius="sm"
-              fontSize="sm"
-            >
-              {PLATFORM_TOKEN[platform]}/USD: {formattedNum(data.price)}
-            </Code>
+            <InfoCell
+              label={`${PLATFORM_TOKEN[platform]}/MATIC`}
+              value={formattedNum(data.priceMatic)}
+            />
+            <InfoCell
+              label={`${PLATFORM_TOKEN[platform]}/USD`}
+              value={`$${formattedNum(data.price)}`}
+            />
           </>
         )}
-        <Code
-          fontWeight="bold"
-          bg="whiteAlpha.100"
-          p="1rem"
-          borderRadius="sm"
-          fontSize="sm"
-        >
-          Stakers: {formattedNum(data.stakers) || 'N/a'}
-        </Code>
-        <Code
-          fontWeight="bold"
-          bg="whiteAlpha.100"
-          p="1rem"
-          borderRadius="sm"
-          fontSize="sm"
-        >
-          TVL (USD): ${formattedNum(data.totalStaked.usd)}
-        </Code>
-        <Code
-          fontWeight="bold"
-          bg="whiteAlpha.100"
-          p="1rem"
-          borderRadius="sm"
-          fontSize="sm"
-        >
-          MATIC Staked: {formattedNum(data.totalStaked.matic)}
-        </Code>
+        <InfoCell
+          label="Stakers"
+          value={formattedNum(data.stakers) || 'N/a'}
+        />
+        <InfoCell
+          label="TVL (USD)"
+          value={`$${formattedNum(data.totalStaked.usd)}`}
+        />
+        <InfoCell
+          label="MATIC Staked"
+          value={formattedNum(data.totalStaked.matic)}
+        />
       </Grid>
       {platform !== 'all' ? (
         <Button

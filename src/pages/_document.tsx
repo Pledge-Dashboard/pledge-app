@@ -31,6 +31,23 @@ export default class Document extends NextDocument {
             rel="icon"
             href="/favicon.ico"
           />
+          {/* Meta og tag */}
+          <meta
+            property="og:title"
+            content="Pledge - MATIC LSD Dashboard"
+          />
+          <meta
+            property="og:description"
+            content="Explore Liquid Staking Derivatives of MATIC"
+          />
+          <meta
+            property="og:image"
+            content="https://pledge-dashboard.vercel.com/screenshot.png"
+          />
+          <meta
+            property="og:url"
+            content="https://pledge-dashboard.vercel.com"
+          />
         </Head>
         <body>
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />

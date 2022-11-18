@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, Skeleton, Text } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import { createChart, IChartApi, ISeriesApi } from 'lightweight-charts';
@@ -30,7 +30,7 @@ const GenericChart: React.FC<{
   field: FieldNames;
   platform: PlatformNames | 'all';
 }> = ({ width, height, field, platform }) => {
-  const { historyByPlatform } = useContext(DataStoreContext);
+  const { historyByPlatform, isHistoricalDataLoading } = useContext(DataStoreContext);
   // const [value, setValue] = useState<number>(0);
 
   const data = useMemo(() => {
@@ -94,7 +94,7 @@ const GenericChart: React.FC<{
     let series: ISeriesApi<'Area'>;
     let chart: IChartApi;
 
-    if (formattedData.length > 0) {
+    if (formattedData.length > 2) {
       chart = createChart(ref.current ? ref.current : '', {
         width: WIDTH,
         height: HEIGHT,
@@ -167,6 +167,7 @@ const GenericChart: React.FC<{
       setChartCreated(undefined);
     }
     return () => {
+      if (ref.current) ref.current.innerHTML = '';
       chart?.remove();
     };
   }, [formattedData]);
@@ -184,23 +185,15 @@ const GenericChart: React.FC<{
       w={width}
       h={height}
     >
-      {formattedData?.length > 2 ? (
-        <Box
-          ref={ref}
-          id={'chart'}
-        />
-      ) : (
-        <Flex
-          w="full"
-          h="full"
-          align="center"
-          justify="center"
-          borderRadius="md"
-          bg="whiteAlpha.200"
-        >
-          Data Unavailable
-        </Flex>
-      )}
+      <Skeleton
+        h="full"
+        w="full"
+        display={isHistoricalDataLoading ? 'block' : 'none'}
+      />
+      <Box
+        ref={ref}
+        id={'chart'}
+      ></Box>
     </Box>
   );
 };
