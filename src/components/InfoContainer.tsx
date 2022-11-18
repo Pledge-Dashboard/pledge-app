@@ -9,7 +9,7 @@ const InfoCell = ({ label, value }: { label: string; value: string | number }) =
     <Flex
       bg="whiteAlpha.100"
       borderRadius="sm"
-      p="1rem"
+      p={{ base: '0.5rem', sm: '1rem' }}
       align="center"
     >
       <Code
@@ -46,7 +46,7 @@ const InfoContainer = ({ platform }: { platform: PlatformNames | 'all' }) => {
       id="info-container"
       w={{ base: '100%', lg: '50%' }}
       h={{ base: '100%', xl: '50%' }}
-      p="2rem 3rem"
+      p={{ base: '1rem', lg: '2rem 3rem' }}
       m="auto"
       ml={{ base: 0, lg: '-10%' }}
       bg="#000C3D"
