@@ -15,11 +15,15 @@ const ChartContainer = ({
   platform: PlatformNames | 'all';
   setPlatform: (platform: PlatformNames | 'all') => void;
 }) => {
-  const [isLargerThan1200] = useMediaQuery('(min-width: 1200px)', {
+  const [isLargerThanXl] = useMediaQuery('(min-width: 80em)', {
     ssr: true,
     fallback: false, // return false on the server, and re-evaluate on the client side
   });
-  const [isLargerThan1000] = useMediaQuery('(min-width: 1000px)', {
+  const [isLargerThanMd] = useMediaQuery('(min-width: 48em)', {
+    ssr: true,
+    fallback: false, // return false on the server, and re-evaluate on the client side
+  });
+  const [isLargerThanSm] = useMediaQuery('(min-width: 30em)', {
     ssr: true,
     fallback: false, // return false on the server, and re-evaluate on the client side
   });
@@ -34,9 +38,8 @@ const ChartContainer = ({
   return (
     <Flex
       id="chart-container"
-      w={{ base: '100%', xl: '60%' }}
+      w={{ base: '100%', lg: '60%', xl: '60%' }}
       my="5rem"
-      mb={{ base: 0, xl: '5rem' }}
       maxH="60rem"
       bg="#242C4D"
       p={{ base: '2rem', xl: '3rem 11rem 3rem 2rem' }}
@@ -63,8 +66,8 @@ const ChartContainer = ({
           <GenericChart
             platform={platform}
             field={field}
-            width={isLargerThan1000 ? (isLargerThan1200 ? 600 : 400) : 300}
-            height={isLargerThan1000 ? 400 : 300}
+            width={isLargerThanSm ? (isLargerThanMd ? (isLargerThanXl ? 500 : 300) : 400) : 300}
+            height={isLargerThanMd ? 400 : 300}
           />
         </Box>
       </Flex>

@@ -11,7 +11,6 @@ export const LiquidStakingInfo = () => {
     <Box
       width={'full'}
       textAlign="center"
-      minHeight={'95vh'}
       id="LiquidStaking"
       as="section"
       padding={{ base: 8, md: 0 }}

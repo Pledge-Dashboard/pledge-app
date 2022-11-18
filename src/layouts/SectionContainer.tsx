@@ -10,13 +10,12 @@ interface Props {
 export const SectionContainer = ({ id, title, children }: Props) => {
   return (
     <Flex
-      minHeight="95vh"
       id={id}
       as="section"
       w="full"
       align={'center'}
       flexDir={'column'}
-      pt={16}
+      py={16}
       scrollMarginTop={16}
     >
       <Text
