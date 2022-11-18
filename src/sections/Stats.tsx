@@ -17,8 +17,7 @@ export const Stats = () => {
         h="60%"
         flex={1}
         alignContent="center"
-        wrap={{ base: 'wrap', xl: 'nowrap' }}
-        mb="24"
+        wrap={{ base: 'wrap', lg: 'nowrap' }}
       >
         <ChartContainer
           platform={platform}

@@ -29,9 +29,10 @@ const PlatformButton = ({ setPlatform, platform, platformName }: PlatformSwitche
 const PlatformSwitcher: FC<PlatformSwitcherProps> = ({ platform, setPlatform }) => {
   return (
     <Flex
-      gap="10"
+      gap={{ base: '4', xl: '10' }}
       mb="8"
       w="full"
+      wrap={{ base: 'wrap', xl: 'nowrap' }}
     >
       <PlatformButton
         platformName="all"

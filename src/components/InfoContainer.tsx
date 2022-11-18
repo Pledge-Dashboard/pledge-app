@@ -1,4 +1,4 @@
-import { Box, Grid, Heading, Code, Button } from '@chakra-ui/react';
+import { Box, Grid, Heading, Code, Button, Flex } from '@chakra-ui/react';
 import { useContext, useMemo } from 'react';
 import DataStoreContext, { defaultPlatformData } from '../context/DataStore';
 import { PlatformData, PlatformNames, PLATFORM_NAME, PLATFORM_TOKEN, PLATFORM_URI } from '../types';
@@ -6,16 +6,18 @@ import { formattedNum } from '../utils/numberFormatter';
 
 const InfoCell = ({ label, value }: { label: string; value: string | number }) => {
   return (
-    <Box
+    <Flex
       bg="whiteAlpha.100"
       borderRadius="sm"
+      p="1rem"
+      align="center"
     >
       <Code
         fontWeight="bold"
         bg="transparent"
-        p="1rem"
         borderRadius="sm"
         fontSize="sm"
+        p="0"
       >
         {label}:
       </Code>
@@ -24,10 +26,12 @@ const InfoCell = ({ label, value }: { label: string; value: string | number }) =
         bg="transparent"
         color="pink.400"
         fontSize="lg"
+        py="0"
+        px="4"
       >
         {value}
       </Code>
-    </Box>
+    </Flex>
   );
 };
 
@@ -40,11 +44,11 @@ const InfoContainer = ({ platform }: { platform: PlatformNames | 'all' }) => {
   return (
     <Box
       id="info-container"
-      w={{ base: '100%', xl: '50%' }}
+      w={{ base: '100%', lg: '50%' }}
       h={{ base: '100%', xl: '50%' }}
       p="2rem 3rem"
       m="auto"
-      ml={{ base: 0, xl: '-10%' }}
+      ml={{ base: 0, lg: '-10%' }}
       bg="#000C3D"
       zIndex={10}
     >
