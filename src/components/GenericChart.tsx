@@ -167,6 +167,7 @@ const GenericChart: React.FC<{
       setChartCreated(undefined);
     }
     return () => {
+      if (ref.current) ref.current.innerHTML = '';
       chart?.remove();
     };
   }, [formattedData]);
