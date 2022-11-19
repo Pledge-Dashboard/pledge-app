@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { Link } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import { Link } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
 
 export const NavLink = ({ href, displayString }: { href: string; displayString: string }) => {
   const router = useRouter();

@@ -1,9 +1,10 @@
-import { Box, Flex, useMediaQuery } from '@chakra-ui/react';
-import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
 import FieldSwitcher from '../components/FieldSwitcher';
-import { FieldNames, PlatformNames } from '../types';
 import PlatformSwitcher from './PlatformSwitcher';
+import dynamic from 'next/dynamic';
+import { Box, Flex, useMediaQuery } from '@chakra-ui/react';
+import { FieldNames, PlatformNames } from '../types';
+import { useEffect, useState } from 'react';
+
 const GenericChart = dynamic(() => import('../components/GenericChart'), {
   ssr: false,
 });

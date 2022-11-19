@@ -1,8 +1,8 @@
+import BlurCircle from '../components/BlurCircle';
+import DataStoreContext from '../context/DataStore';
 import { Box, Flex, Text } from '@chakra-ui/react';
 import { StakeInfoCard } from '../components/StakeInfoCard';
-import BlurCircle from '../components/BlurCircle';
 import { useContext } from 'react';
-import DataStoreContext from '../context/DataStore';
 
 export const LiquidStakingInfo = () => {
   const { averageAPY } = useContext(DataStoreContext);

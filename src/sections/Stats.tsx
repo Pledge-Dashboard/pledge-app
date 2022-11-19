@@ -1,9 +1,9 @@
-import { Flex } from '@chakra-ui/react';
-import { useState } from 'react';
 import ChartContainer from '../components/ChartContainer';
 import InfoContainer from '../components/InfoContainer';
-import { SectionContainer } from '../layouts/SectionContainer';
+import { Flex } from '@chakra-ui/react';
 import { PlatformNames } from '../types';
+import { SectionContainer } from '../layouts/SectionContainer';
+import { useState } from 'react';
 
 export const Stats = () => {
   const [platform, setPlatform] = useState<PlatformNames | 'all'>('all');
