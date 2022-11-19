@@ -64,6 +64,7 @@ const Platforms = () => {
                 bgColor={'bg.translucent'}
                 m={'auto'}
                 mb={6}
+                mt={-6}
                 bgImage={`url(${PLATFORM_LOGOS[item.toLowerCase() as keyof typeof PLATFORM_LOGOS]})`}
                 bgSize="cover"
                 bgRepeat="no-repeat"
