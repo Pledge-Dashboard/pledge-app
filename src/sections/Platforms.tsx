@@ -1,6 +1,6 @@
 import DataStoreContext from '../context/DataStore';
 import { Box, Text, Grid, GridItem, Button } from '@chakra-ui/react';
-import { PLATFORM_URI } from '../constants';
+import { PLATFORM_URI, PLATFORM_LOGOS } from '../constants';
 import { PlatformData, PlatformNames, PLATFORMS } from '../types';
 import { SectionContainer } from '../layouts/SectionContainer';
 import { formattedNum } from '../utils/numberFormatter';
@@ -58,14 +58,25 @@ const Platforms = () => {
               bg="bg.translucent"
               textAlign="center"
             >
-              <Box></Box>
+              <Box
+                h="125px"
+                w="125px"
+                bgColor={'bg.translucent'}
+                m={'auto'}
+                mb={6}
+                bgImage={`url(${PLATFORM_LOGOS[item.toLowerCase() as keyof typeof PLATFORM_LOGOS]})`}
+                bgSize="cover"
+                bgRepeat="no-repeat"
+                bgPosition="center"
+              ></Box>
               <Box
                 bgColor={'bg.translucent'}
                 mr={16}
               >
                 <Box
                   textAlign={'left'}
-                  px={2}
+                  px={4}
+                  pt={4}
                 >
                   <Text
                     fontSize={{ base: 'xs', md: 'sm' }}
@@ -86,9 +97,15 @@ const Platforms = () => {
                   </Text>
                 </Box>
                 <Box
+                  h={'1px'}
+                  w={'60%'}
+                  bgColor={'bg.translucent'}
+                  my={2}
+                />
+                <Box
                   textAlign={'left'}
-                  px={2}
-                  mt={2}
+                  px={4}
+                  pb={4}
                 >
                   <Text
                     fontSize={{ base: 'xs', md: 'sm' }}
@@ -107,25 +124,19 @@ const Platforms = () => {
                   </Text>
                 </Box>
               </Box>
-              <Box
-                mt={8}
-                textAlign={'center'}
-              >
-                <a
+              <Box textAlign={'center'}>
+                <Button
+                  as={'a'}
+                  variant="outline"
+                  borderRadius={0}
+                  borderColor="#FF7878"
+                  bgColor={'#FF787823'}
+                  _hover={{ backgroundColor: '#FF787833' }}
+                  my="4"
                   href={PLATFORM_URI[item.toLowerCase() as PlatformNames]}
-                  target="_blank"
-                  rel="noreferrer"
                 >
-                  <Button
-                    fontSize={{ base: 'xs', md: 'sm' }}
-                    as="span"
-                    size={'sm'}
-                    variant="solid"
-                    colorScheme={'pink'}
-                  >
-                    Stake Now
-                  </Button>
-                </a>
+                  Stake Now
+                </Button>
               </Box>
             </GridItem>
           ))}
