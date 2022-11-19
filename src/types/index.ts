@@ -24,6 +24,13 @@ export const PLATFORM_NAME = {
   all: 'All',
 };
 
+export const PLATFORM_LOGOS = {
+  lido: '/platform-logos/lido.jpeg',
+  ankr: '/platform-logos/ankr.jpg',
+  stader: '/platform-logos/stader.jpeg',
+  tenderize: '/platform-logos/tenderize.png',
+};
+
 // values of platforms enum
 export type PlatformNames = 'lido' | 'ankr' | 'stader' | 'tenderize';
 
