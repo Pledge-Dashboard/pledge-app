@@ -1,9 +1,10 @@
-import { useContext, useMemo } from 'react';
-import { SectionContainer } from '../layouts/SectionContainer';
-import { Box, Text, Grid, GridItem, Button } from '@chakra-ui/react';
 import DataStoreContext from '../context/DataStore';
-import { PLATFORM_URI, PlatformData, PlatformNames, PLATFORMS } from '../types';
+import { Box, Text, Grid, GridItem, Button } from '@chakra-ui/react';
+import { PLATFORM_URI } from '../constants';
+import { PlatformData, PlatformNames, PLATFORMS } from '../types';
+import { SectionContainer } from '../layouts/SectionContainer';
 import { formattedNum } from '../utils/numberFormatter';
+import { useContext, useMemo } from 'react';
 
 interface Data {
   [key: string]: PlatformData;
@@ -54,62 +55,57 @@ const Platforms = () => {
             <GridItem
               key={index}
               w="16rem"
-              h="14rem"
               bg="bg.translucent"
-              borderRadius="xl"
-              p={4}
               textAlign="center"
             >
-              <Text fontSize={{ base: 'md', md: 'lg' }}>{item}</Text>
+              <Box></Box>
               <Box
-                h="1px"
-                w={'100%'}
-                mt={4}
                 bgColor={'bg.translucent'}
-                mb={4}
-              />
-              <Box
-                textAlign={'left'}
-                px={2}
+                mr={16}
               >
-                <Text
-                  fontSize={{ base: 'xs', md: 'sm' }}
-                  as="span"
-                  mr={4}
+                <Box
+                  textAlign={'left'}
+                  px={2}
                 >
-                  {platformData[item.toLowerCase()].apy ? 'APY' : 'APR'}
-                </Text>
-                <Text
-                  fontSize={{ base: 'lg', md: 'xl' }}
-                  as="span"
-                  bg="bg.gradient"
-                  backgroundClip="text"
+                  <Text
+                    fontSize={{ base: 'xs', md: 'sm' }}
+                    as="span"
+                    mr={4}
+                  >
+                    {platformData[item.toLowerCase()].apy ? 'APY' : 'APR'}
+                  </Text>
+                  <Text
+                    fontSize={{ base: 'lg', md: 'xl' }}
+                    as="span"
+                    bg="bg.gradient"
+                    backgroundClip="text"
+                  >
+                    {platformData[item.toLowerCase()].apy?.substring(0, 4) ||
+                      platformData[item.toLowerCase()].apr?.substring(0, 4)}
+                    %
+                  </Text>
+                </Box>
+                <Box
+                  textAlign={'left'}
+                  px={2}
+                  mt={2}
                 >
-                  {platformData[item.toLowerCase()].apy?.substring(0, 4) ||
-                    platformData[item.toLowerCase()].apr?.substring(0, 4)}
-                  %
-                </Text>
-              </Box>
-              <Box
-                textAlign={'left'}
-                px={2}
-                mt={2}
-              >
-                <Text
-                  fontSize={{ base: 'xs', md: 'sm' }}
-                  as="span"
-                  mr={4}
-                >
-                  TVL
-                </Text>
-                <Text
-                  fontSize={{ base: 'lg', md: 'xl' }}
-                  as="span"
-                  bg="bg.gradient"
-                  backgroundClip="text"
-                >
-                  {formattedNum(platformData[item.toLowerCase()].totalStaked?.usd)}
-                </Text>
+                  <Text
+                    fontSize={{ base: 'xs', md: 'sm' }}
+                    as="span"
+                    mr={4}
+                  >
+                    TVL
+                  </Text>
+                  <Text
+                    fontSize={{ base: 'lg', md: 'xl' }}
+                    as="span"
+                    bg="bg.gradient"
+                    backgroundClip="text"
+                  >
+                    {formattedNum(platformData[item.toLowerCase()].totalStaked?.usd)}
+                  </Text>
+                </Box>
               </Box>
               <Box
                 mt={8}

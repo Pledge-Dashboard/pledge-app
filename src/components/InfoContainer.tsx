@@ -1,7 +1,8 @@
 import { Box, Grid, Heading, Code, Button, Flex } from '@chakra-ui/react';
 import { useContext, useMemo } from 'react';
 import DataStoreContext, { defaultPlatformData } from '../context/DataStore';
-import { PlatformData, PlatformNames, PLATFORM_NAME, PLATFORM_TOKEN, PLATFORM_URI } from '../types';
+import { PlatformData, PlatformNames } from '../types';
+import { PLATFORM_NAME, PLATFORM_TOKEN, PLATFORM_URI } from '../constants';
 import { formattedNum } from '../utils/numberFormatter';
 
 const InfoCell = ({ label, value }: { label: string; value: string | number }) => {

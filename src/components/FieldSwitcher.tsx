@@ -1,7 +1,8 @@
 import { Button, Flex } from '@chakra-ui/react';
 import { FC, useContext, useEffect } from 'react';
 import DataStoreContext from '../context/DataStore';
-import { FieldNames, PlatformNames, PLATFORM_TOKEN } from '../types';
+import { FieldNames, PlatformNames } from '../types';
+import { PLATFORM_TOKEN } from '../constants';
 
 interface FieldSwitcherProps {
   field: FieldNames;
