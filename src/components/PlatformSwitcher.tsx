@@ -1,6 +1,7 @@
 import { Button, Flex } from '@chakra-ui/react';
 import { FC } from 'react';
-import { PlatformNames, PLATFORM_NAME } from '../types';
+import { PLATFORM_NAME } from '../constants';
+import { PlatformNames } from '../types';
 
 interface PlatformSwitcherProps {
   platform: PlatformNames | 'all';

@@ -1,7 +1,6 @@
-import { Button, Flex, Text } from '@chakra-ui/react';
 import BlurCircle from '../components/BlurCircle';
-// import { LandingWidget } from '../components/LandingWidget';
 import dynamic from 'next/dynamic';
+import { Button, Flex, Text } from '@chakra-ui/react';
 
 const LandingWidget = dynamic(() => import('../components/LandingWidget'), {
   ssr: false,
@@ -59,7 +58,6 @@ export const Landing = () => {
       >
         Explore Now!!
       </Button>
-
       <LandingWidget />
     </Flex>
   );

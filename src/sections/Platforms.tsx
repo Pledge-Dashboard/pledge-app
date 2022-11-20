@@ -1,9 +1,10 @@
-import { useContext, useMemo } from 'react';
-import { SectionContainer } from '../layouts/SectionContainer';
-import { Box, Text, Grid, GridItem, Button } from '@chakra-ui/react';
 import DataStoreContext from '../context/DataStore';
-import { PLATFORM_URI, PlatformData, PlatformNames, PLATFORMS } from '../types';
+import { Box, Text, Grid, GridItem, Button } from '@chakra-ui/react';
+import { PLATFORM_URI, PLATFORM_LOGOS } from '../constants';
+import { PlatformData, PlatformNames, PLATFORMS } from '../types';
+import { SectionContainer } from '../layouts/SectionContainer';
 import { formattedNum } from '../utils/numberFormatter';
+import { useContext, useMemo } from 'react';
 
 interface Data {
   [key: string]: PlatformData;
@@ -46,7 +47,7 @@ const Platforms = () => {
           templateColumns={{
             base: 'repeat(1, 1fr)',
             md: 'repeat(2, 1fr)',
-            lg: 'repeat(3, 1fr)',
+            lg: 'repeat(4, 1fr)',
           }}
           gap={12}
         >
@@ -54,82 +55,89 @@ const Platforms = () => {
             <GridItem
               key={index}
               w="16rem"
-              h="14rem"
               bg="bg.translucent"
-              borderRadius="xl"
-              p={4}
               textAlign="center"
             >
-              <Text fontSize={{ base: 'md', md: 'lg' }}>{item}</Text>
               <Box
-                h="1px"
-                w={'100%'}
-                mt={4}
+                h="125px"
+                w="125px"
                 bgColor={'bg.translucent'}
-                mb={4}
-              />
+                m={'auto'}
+                mb={6}
+                mt={-6}
+                bgImage={`url(${PLATFORM_LOGOS[item.toLowerCase() as keyof typeof PLATFORM_LOGOS]})`}
+                bgSize="cover"
+                bgRepeat="no-repeat"
+                bgPosition="center"
+              ></Box>
               <Box
-                textAlign={'left'}
-                px={2}
+                bgColor={'bg.translucent'}
+                mr={16}
               >
-                <Text
-                  fontSize={{ base: 'xs', md: 'sm' }}
-                  as="span"
-                  mr={4}
+                <Box
+                  textAlign={'left'}
+                  px={4}
+                  pt={4}
                 >
-                  {platformData[item.toLowerCase()].apy ? 'APY' : 'APR'}
-                </Text>
-                <Text
-                  fontSize={{ base: 'lg', md: 'xl' }}
-                  as="span"
-                  bg="bg.gradient"
-                  backgroundClip="text"
-                >
-                  {platformData[item.toLowerCase()].apy?.substring(0, 4) ||
-                    platformData[item.toLowerCase()].apr?.substring(0, 4)}
-                  %
-                </Text>
-              </Box>
-              <Box
-                textAlign={'left'}
-                px={2}
-                mt={2}
-              >
-                <Text
-                  fontSize={{ base: 'xs', md: 'sm' }}
-                  as="span"
-                  mr={4}
-                >
-                  TVL
-                </Text>
-                <Text
-                  fontSize={{ base: 'lg', md: 'xl' }}
-                  as="span"
-                  bg="bg.gradient"
-                  backgroundClip="text"
-                >
-                  {formattedNum(platformData[item.toLowerCase()].totalStaked?.usd)}
-                </Text>
-              </Box>
-              <Box
-                mt={8}
-                textAlign={'center'}
-              >
-                <a
-                  href={PLATFORM_URI[item.toLowerCase() as PlatformNames]}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Button
+                  <Text
                     fontSize={{ base: 'xs', md: 'sm' }}
                     as="span"
-                    size={'sm'}
-                    variant="solid"
-                    colorScheme={'pink'}
+                    mr={4}
                   >
-                    Stake Now
-                  </Button>
-                </a>
+                    {platformData[item.toLowerCase()].apy ? 'APY' : 'APR'}
+                  </Text>
+                  <Text
+                    fontSize={{ base: 'lg', md: 'xl' }}
+                    as="span"
+                    bg="bg.gradient"
+                    backgroundClip="text"
+                  >
+                    {platformData[item.toLowerCase()].apy?.substring(0, 4) ||
+                      platformData[item.toLowerCase()].apr?.substring(0, 4)}
+                    %
+                  </Text>
+                </Box>
+                <Box
+                  h={'1px'}
+                  w={'60%'}
+                  bgColor={'bg.translucent'}
+                  my={2}
+                />
+                <Box
+                  textAlign={'left'}
+                  px={4}
+                  pb={4}
+                >
+                  <Text
+                    fontSize={{ base: 'xs', md: 'sm' }}
+                    as="span"
+                    mr={4}
+                  >
+                    TVL
+                  </Text>
+                  <Text
+                    fontSize={{ base: 'lg', md: 'xl' }}
+                    as="span"
+                    bg="bg.gradient"
+                    backgroundClip="text"
+                  >
+                    {formattedNum(platformData[item.toLowerCase()].totalStaked?.usd)}
+                  </Text>
+                </Box>
+              </Box>
+              <Box textAlign={'center'}>
+                <Button
+                  as={'a'}
+                  variant="outline"
+                  borderRadius={0}
+                  borderColor="#FF7878"
+                  bgColor={'#FF787823'}
+                  _hover={{ backgroundColor: '#FF787833' }}
+                  my="4"
+                  href={PLATFORM_URI[item.toLowerCase() as PlatformNames]}
+                >
+                  Stake Now
+                </Button>
               </Box>
             </GridItem>
           ))}

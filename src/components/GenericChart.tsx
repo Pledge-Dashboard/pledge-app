@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Box, Flex, Skeleton, Text } from '@chakra-ui/react';
+import DataStoreContext from '../context/DataStore';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
-import { createChart, IChartApi, ISeriesApi } from 'lightweight-charts';
-import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
-import DataStoreContext from '../context/DataStore';
+import { Box, Skeleton } from '@chakra-ui/react';
 import { FieldNames, PlatformNames } from '../types';
+import { createChart, IChartApi, ISeriesApi } from 'lightweight-charts';
 import { formattedNum } from '../utils/numberFormatter';
 
 export enum TimePeriod {

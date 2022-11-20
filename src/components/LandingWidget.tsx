@@ -1,6 +1,6 @@
+import DataStoreContext from '../context/DataStore';
 import { Box, Flex, Skeleton, Text } from '@chakra-ui/react';
 import { FC, useContext } from 'react';
-import DataStoreContext from '../context/DataStore';
 import { formattedNum } from '../utils/numberFormatter';
 
 const LandingWidget: FC = () => {
