@@ -19,6 +19,7 @@ const InfoCell = ({ label, value }: { label: string; value: string | number }) =
         borderRadius="sm"
         fontSize="sm"
         p="0"
+        color={'white'}
       >
         {label}:
       </Code>
