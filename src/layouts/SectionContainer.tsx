@@ -17,6 +17,7 @@ export const SectionContainer = ({ id, title, children }: Props) => {
       flexDir={'column'}
       py={16}
       scrollMarginTop={16}
+      minH={'95vh'}
     >
       <Text
         fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}

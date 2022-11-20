@@ -43,7 +43,7 @@ const Platforms = () => {
           Stake your MATIC
         </Text>
         <Grid
-          mt={12}
+          mt={24}
           templateColumns={{
             base: 'repeat(1, 1fr)',
             md: 'repeat(2, 1fr)',

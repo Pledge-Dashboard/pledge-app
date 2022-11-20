@@ -9,7 +9,7 @@ const LandingWidget = dynamic(() => import('../components/LandingWidget'), {
 export const Landing = () => {
   return (
     <Flex
-      h="calc(100vh - 18rem)"
+      h="calc(100vh - 12rem)"
       id="Landing"
       as="section"
       w="full"
