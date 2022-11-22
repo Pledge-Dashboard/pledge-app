@@ -140,7 +140,7 @@ const GenericChart: React.FC<{
         autoScale: false,
         scaleMargins: {
           top: 0.3,
-          bottom: 0.3,
+          bottom: 0.05,
         },
       });
       // update the title when hovering on the chart

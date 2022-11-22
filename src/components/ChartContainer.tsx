@@ -67,7 +67,7 @@ const ChartContainer = ({
           <GenericChart
             platform={platform}
             field={field}
-            width={isLargerThanSm ? (isLargerThanMd ? (isLargerThanXl ? 500 : 300) : 400) : 300}
+            width={isLargerThanSm ? (isLargerThanMd ? (isLargerThanXl ? 500 : 550) : 400) : 300}
             height={isLargerThanMd ? 400 : 300}
           />
         </Box>

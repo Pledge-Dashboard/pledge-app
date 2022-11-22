@@ -118,7 +118,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
     ankr: ankrData,
     claystack: claystackData,
     tenderize: tenderizeData,
-    timestamp: new Date().toISOString(),
+    timestamp: new Date().getTime(),
   };
 
   const { database }: { database: Db } = await connectToDatabase();

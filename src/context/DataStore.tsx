@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { createContext, FunctionComponent, PropsWithChildren, useMemo } from 'react';
+import { createContext, FunctionComponent, PropsWithChildren, useEffect, useMemo } from 'react';
 import { AggregatedData, DataSnapshotAll, DataStore, HistoryByPlatform, PlatformData, PlatformNames } from '../types';
 import useSWR from 'swr';
 import { formattedNum } from '../utils/numberFormatter';
@@ -85,7 +85,7 @@ const DataStoreProvider: FunctionComponent<PropsWithChildren> = ({ children }) =
       acc.all.push({
         _id,
         timestamp,
-        stakers: String(stakers),
+        stakers: !stakers ? '' : stakers.toString(),
         totalStaked: {
           matic: totalStaked.toString(),
           usd: totalStakedUSD.toString(),
@@ -163,6 +163,11 @@ const DataStoreProvider: FunctionComponent<PropsWithChildren> = ({ children }) =
     }
     return defaultCurrentData;
   }, [fetchedCurrentData, totalStaked, totalValueLocked]);
+
+  useEffect(() => {
+    console.log('data', historical?.[historical?.length - 1].lido);
+    console.log('current', data);
+  }, [historical]);
 
   return (
     <DataStoreContext.Provider
