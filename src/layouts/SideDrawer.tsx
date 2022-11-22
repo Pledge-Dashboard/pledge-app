@@ -1,4 +1,5 @@
 import {
+  Box,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -6,10 +7,10 @@ import {
   DrawerHeader,
   DrawerOverlay,
   IconButton,
-  Text,
   useDisclosure,
 } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
+import { NavLink } from '../components/NavLink';
 
 export const SideDrawer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -32,15 +33,36 @@ export const SideDrawer = () => {
         placement="right"
         onClose={onClose}
       >
-        <DrawerOverlay>
-          <DrawerContent>
-            <DrawerCloseButton />
-            <DrawerHeader>Menu</DrawerHeader>
-            <DrawerBody>
-              <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed</Text>
-            </DrawerBody>
-          </DrawerContent>
-        </DrawerOverlay>
+        <DrawerOverlay />
+        <DrawerContent
+          bg={'none'}
+          bgColor="bg.translucent"
+          backdropFilter={'auto'}
+          backdropBlur={'lg'}
+        >
+          <DrawerCloseButton />
+          <DrawerHeader>Menu</DrawerHeader>
+          <DrawerBody>
+            <Box onClick={onClose}>
+              <NavLink
+                href="/#Statistics"
+                displayString="Statistics"
+              />
+            </Box>
+            <Box onClick={onClose}>
+              <NavLink
+                href="/#Platforms"
+                displayString="Platforms"
+              />
+            </Box>
+            <Box onClick={onClose}>
+              <NavLink
+                href="/#LiquidStaking"
+                displayString="Liquid Staking"
+              />
+            </Box>
+          </DrawerBody>
+        </DrawerContent>
       </Drawer>
     </>
   );
