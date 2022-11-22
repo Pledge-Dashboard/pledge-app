@@ -4,7 +4,6 @@ import {
   DrawerBody,
   DrawerCloseButton,
   DrawerContent,
-  DrawerHeader,
   DrawerOverlay,
   Flex,
   IconButton,
@@ -37,9 +36,9 @@ export const SideDrawer = () => {
         <DrawerOverlay />
         <DrawerContent
           bg={'none'}
-          bgColor="bg.modalBg"
+          bgColor="blackAlpha.300"
           backdropFilter={'auto'}
-          backdropBlur={'lg'}
+          backdropBlur={'xl'}
         >
           <DrawerCloseButton
             top="8"
