@@ -1,5 +1,4 @@
 import {
-  Box,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -14,6 +13,11 @@ import { NavLink } from '../components/NavLink';
 
 export const SideDrawer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const closeWithDelay = () => {
+    setTimeout(() => {
+      onClose();
+    }, 1000);
+  };
   return (
     <>
       <IconButton
@@ -59,6 +63,7 @@ export const SideDrawer = () => {
               bg="whiteAlpha.50"
               href="/#Statistics"
               displayString="Statistics"
+              onClick={closeWithDelay}
             />
 
             <NavLink
@@ -68,6 +73,7 @@ export const SideDrawer = () => {
               bg="whiteAlpha.50"
               href="/#Platforms"
               displayString="Platforms"
+              onClick={closeWithDelay}
             />
 
             <NavLink
@@ -77,6 +83,7 @@ export const SideDrawer = () => {
               bg="whiteAlpha.50"
               href="/#LiquidStaking"
               displayString="Liquid Staking"
+              onClick={closeWithDelay}
             />
           </DrawerBody>
         </DrawerContent>

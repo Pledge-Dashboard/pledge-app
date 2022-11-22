@@ -8,8 +8,9 @@ export const NavLink: FC<
     href: string;
     displayString: string;
     hidePseudo?: boolean;
+    onClick?: () => void;
   }
-> = ({ href, displayString, hidePseudo, ...props }) => {
+> = ({ href, displayString, hidePseudo, onClick, ...props }) => {
   const router = useRouter();
 
   const [width, setWidth] = useState('0');
@@ -32,6 +33,7 @@ export const NavLink: FC<
         fontWeight={active ? '600' : '500'}
         fontSize="18"
         position={'relative'}
+        onClick={onClick}
         _hover={{
           _after: {
             width: width !== '0' ? '3ch' : '1.5ch',
