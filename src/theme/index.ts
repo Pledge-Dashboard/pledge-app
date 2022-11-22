@@ -12,6 +12,7 @@ const colors = {
     gradient: 'radial-gradient(106.94% 682.55% at 0% 28%, #BE6BFF 16.75%, #FF7878 100%)',
     gradientBright: 'radial-gradient(106.94% 682.55% at 0% 0%, #2816FF 16.75%, #FF096E 100%)',
     translucent: '#D9D9D91A',
+    modalBg: '#000000D1',
   },
   text: {
     _default: '#FAFAFA',

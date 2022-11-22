@@ -1,9 +1,15 @@
 import NextLink from 'next/link';
-import { Link } from '@chakra-ui/react';
+import { ChakraProps, Link } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 
-export const NavLink = ({ href, displayString }: { href: string; displayString: string }) => {
+export const NavLink: FC<
+  ChakraProps & {
+    href: string;
+    displayString: string;
+    hidePseudo?: boolean;
+  }
+> = ({ href, displayString, hidePseudo, ...props }) => {
   const router = useRouter();
 
   const [width, setWidth] = useState('0');
@@ -34,13 +40,14 @@ export const NavLink = ({ href, displayString }: { href: string; displayString: 
         _after={{
           content: '""',
           position: 'absolute',
-          right: '0',
+          right: '2',
           width: width,
           height: '2px',
-          display: 'block',
+          display: hidePseudo ? 'none' : 'block',
           bg: 'bg.gradient',
           transition: 'width 0.3s ease-in-out',
         }}
+        {...props}
       >
         {displayString}
       </Link>
