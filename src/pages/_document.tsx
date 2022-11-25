@@ -34,11 +34,11 @@ export default class Document extends NextDocument {
           {/* Meta og tag */}
           <meta
             property="og:title"
-            content="Pledge - MATIC LSD Dashboard"
+            content="Pledge - A MATIC LSD Dashboard"
           />
           <meta
             property="og:description"
-            content="Explore Liquid Staking Derivatives of MATIC"
+            content="Find out the best platform to stake MATIC and earn rewards. Explore Now!!!"
           />
           <meta
             property="og:image"
@@ -47,6 +47,11 @@ export default class Document extends NextDocument {
           <meta
             property="og:url"
             content="https://pledge-dashboard.vercel.app"
+          />
+          {/* twitter og tags */}
+          <meta
+            name="twitter:card"
+            content="summary_large_image"
           />
         </Head>
         <body>
