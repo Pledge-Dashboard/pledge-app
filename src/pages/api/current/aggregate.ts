@@ -80,8 +80,23 @@ export default async function handler(request: NextApiRequest, response: NextApi
   }
 
   //   CLAYSTACK DATA SYNC
-  // {
-  // }
+  {
+    const CLAYSTACK_API_URI = 'https://api.claystack.com/polygon_stats';
+    const claystackApiRes = await (await fetch(CLAYSTACK_API_URI)).json();
+
+    const { price, apy, stakers, totalStaked } = claystackApiRes;
+
+    claystackData = {
+      priceMatic: price, // price of stMATIC token in MATIC
+      price: 1 / price, // price of MATIC token in stMATIC
+      apy: apy.toString(),
+      stakers: stakers.toString(),
+      totalStaked: {
+        matic: totalStaked.matic.toString(),
+        usd: totalStaked.usd.toString(),
+      },
+    };
+  }
 
   //   Tenderize Data Sync
   {

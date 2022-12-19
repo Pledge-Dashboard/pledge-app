@@ -21,7 +21,7 @@ const defaultCurrentData = {
   lido: defaultPlatformData,
   ankr: defaultPlatformData,
   stader: defaultPlatformData,
-  // claystack: defaultPlatformData,
+  claystack: defaultPlatformData,
   tenderize: defaultPlatformData,
   all: {
     stakers: '0',
@@ -39,7 +39,7 @@ const DataStoreContext = createContext<DataStore>({
     lido: [],
     ankr: [],
     stader: [],
-    // claystack: [],
+    claystack: [],
     tenderize: [],
     all: [],
   },
@@ -61,7 +61,7 @@ const DataStoreProvider: FunctionComponent<PropsWithChildren> = ({ children }) =
       lido: [],
       ankr: [],
       stader: [],
-      // claystack: [],
+      claystack: [],
       tenderize: [],
       all: [],
     };

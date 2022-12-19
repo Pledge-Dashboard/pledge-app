@@ -60,6 +60,11 @@ const PlatformSwitcher: FC<PlatformSwitcherProps> = ({ platform, setPlatform }) 
         platform={platform}
         setPlatform={setPlatform}
       />
+      <PlatformButton
+        platformName="claystack"
+        platform={platform}
+        setPlatform={setPlatform}
+      />
     </Flex>
   );
 };
