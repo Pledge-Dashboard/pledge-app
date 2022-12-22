@@ -3,9 +3,10 @@ export enum PLATFORMS {
   ANKR = 'ankr',
   STADER = 'stader',
   TENDERIZE = 'tenderize',
+  CLAYSTACK = 'claystack',
 }
 // values of platforms enum
-export type PlatformNames = 'lido' | 'ankr' | 'stader' | 'tenderize';
+export type PlatformNames = 'lido' | 'ankr' | 'stader' | 'tenderize' | 'claystack';
 
 export type PlatformData = {
   priceMatic?: number;

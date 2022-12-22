@@ -3,6 +3,7 @@ export const PLATFORM_URI = {
   ankr: 'https://www.ankr.com/staking/stake/matic/',
   stader: 'https://polygon.staderlabs.com/liquid-staking/maticx?',
   tenderize: 'https://app.tenderize.me/stakers/matic',
+  claystack: 'https://app.claystack.com/',
 };
 
 export const PLATFORM_TOKEN = {
@@ -10,6 +11,7 @@ export const PLATFORM_TOKEN = {
   ankr: 'aMATICb',
   stader: 'MATICx',
   tenderize: 'tMATIC',
+  claystack: 'csMATIC',
 };
 
 export const PLATFORM_NAME = {
@@ -17,6 +19,7 @@ export const PLATFORM_NAME = {
   ankr: 'Ankr',
   stader: 'Stader',
   tenderize: 'Tenderize',
+  claystack: 'Claystack',
   all: 'All',
 };
 
@@ -25,4 +28,5 @@ export const PLATFORM_LOGOS = {
   ankr: '/platform-logos/ankr.jpg',
   stader: '/platform-logos/stader.jpeg',
   tenderize: '/platform-logos/tenderize.png',
+  claystack: '/platform-logos/claystack.png',
 };
