@@ -5,11 +5,15 @@ import { connectToDatabase } from '../../../../lib/mongodb';
 export default async function handler(request: NextApiRequest, response: NextApiResponse) {
   const COINGECKO_API_URI = 'https://api.coingecko.com/api/v3';
 
-  const {
-    market_data: {
-      current_price: { usd: currentMaticPriceUSD },
-    },
-  } = await (await fetch(`${COINGECKO_API_URI}/coins/matic-network`)).json();
+  const res = await (await fetch(`${COINGECKO_API_URI}/coins/matic-network`)).json();
+
+  if (!res?.market_data) {
+    response.send({
+      error: 'Coingecko - No data found',
+    });
+    return;
+  }
+  const currentMaticPriceUSD = res.market_data.current_price.usd;
 
   let ankrData, claystackData, tenderizeData;
 
