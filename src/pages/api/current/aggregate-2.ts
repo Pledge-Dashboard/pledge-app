@@ -77,11 +77,11 @@ export default async function handler(request: NextApiRequest, response: NextApi
         }
       );
 
-      response.setHeader('Cache-Control', 's-maxage=300');
+      // response.setHeader('Cache-Control', 's-maxage=300');
       response.status(200).json(result);
     } else {
       await collection.insertOne(result);
-      response.setHeader('Cache-Control', 's-maxage=300');
+      // response.setHeader('Cache-Control', 's-maxage=300');
       response.status(200).json(result);
     }
   } catch (error) {
