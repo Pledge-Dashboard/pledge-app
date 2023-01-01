@@ -23,22 +23,21 @@ export default async function handler(request: NextApiRequest, response: NextApi
     const ankrApiRes = await (await fetch(ANKR_API_URI)).json();
     const polygonData = ankrApiRes.services.find((service: any) => service.serviceName === 'polygon');
 
-    const {
-      market_data: {
-        current_price: { usd: currentPriceUSD },
-      },
-    } = await (await fetch(`${COINGECKO_API_URI}/coins/ankr-matic-reward-earning-bond`)).json();
-
-    ankrData = {
-      priceMatic: currentPriceUSD / currentMaticPriceUSD, // price of ANKR token in MATIC
-      price: currentMaticPriceUSD / currentPriceUSD, // price of MATIC token in ANKR
-      apy: polygonData.apy.toString(),
-      stakers: polygonData.stakers.toString(),
-      totalStaked: {
-        matic: polygonData.totalStaked.toString(),
-        usd: polygonData.totalStakedUsd.toString(),
-      },
-    };
+    fetch(`${COINGECKO_API_URI}/coins/ankr-matic-reward-earning-bond`)
+      .then((res) => res.json())
+      .then((res) => {
+        const currentPriceUSD = res?.market_data?.current_price?.usd;
+        ankrData = {
+          priceMatic: currentPriceUSD / currentMaticPriceUSD, // price of ANKR token in MATIC
+          price: currentMaticPriceUSD / currentPriceUSD, // price of MATIC token in ANKR
+          apy: polygonData.apy.toString(),
+          stakers: polygonData.stakers.toString(),
+          totalStaked: {
+            matic: polygonData.totalStaked.toString(),
+            usd: polygonData.totalStakedUsd.toString(),
+          },
+        };
+      });
   }
 
   //   CLAYSTACK DATA SYNC
@@ -72,21 +71,21 @@ export default async function handler(request: NextApiRequest, response: NextApi
       matic: { tvl },
     } = await (await fetch(TENDERIZE_TVL_API_URI)).json();
 
-    const {
-      market_data: {
-        current_price: { usd: currentPriceUSD },
-      },
-    } = await (await fetch(`${COINGECKO_API_URI}/coins/tmatic`)).json();
+    fetch(`${COINGECKO_API_URI}/coins/tmatic`)
+      .then((res) => res.json())
+      .then((res) => {
+        const currentPriceUSD = res?.market_data?.current_price?.usd;
 
-    tenderizeData = {
-      priceMatic: currentPriceUSD / currentMaticPriceUSD, // price of TMATIC token in MATIC
-      price: currentMaticPriceUSD / currentPriceUSD, // price of MATIC token in TMATIC
-      apy: apy.toString(),
-      totalStaked: {
-        usd: tvl.toString(),
-        matic: (tvl / currentMaticPriceUSD).toString(),
-      },
-    };
+        tenderizeData = {
+          priceMatic: currentPriceUSD / currentMaticPriceUSD, // price of TMATIC token in MATIC
+          price: currentMaticPriceUSD / currentPriceUSD, // price of MATIC token in TMATIC
+          apy: apy.toString(),
+          totalStaked: {
+            usd: tvl.toString(),
+            matic: (tvl / currentMaticPriceUSD).toString(),
+          },
+        };
+      });
   }
 
   const result = {
