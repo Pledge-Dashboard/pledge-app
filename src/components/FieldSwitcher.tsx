@@ -31,10 +31,10 @@ const FieldButton: FC<FieldSwitcherProps & { fieldName: FieldNames; label: strin
 const FieldSwitcher: FC<FieldSwitcherProps & { platform: PlatformNames | 'all' }> = ({ field, setField, platform }) => {
   const { current } = useContext(DataStoreContext);
   useEffect(() => {
-    if (platform !== 'all') {
-      if (field === 'apy' && !current?.[platform].apy) {
+    if (platform !== 'all' && (current?.[platform]?.apy || current?.[platform]?.apr)) {
+      if (field === 'apy' && !current?.[platform]?.apy) {
         setField('apr');
-      } else if (field === 'apr' && !current?.[platform].apr) {
+      } else if (field === 'apr' && !current?.[platform]?.apr) {
         setField('apy');
       }
     }
@@ -74,8 +74,8 @@ const FieldSwitcher: FC<FieldSwitcherProps & { platform: PlatformNames | 'all' }
             setField={setField}
           />
           <FieldButton
-            fieldName={current?.[platform].apy?.toString() ? 'apy' : 'apr'}
-            label={current?.[platform]?.apy?.toString() ? 'APY' : 'APR'}
+            fieldName={current?.[platform]?.apy ? 'apy' : 'apr'}
+            label={current?.[platform]?.apy ? 'APY' : 'APR'}
             field={field}
             setField={setField}
           />

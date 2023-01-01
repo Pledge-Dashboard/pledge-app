@@ -50,8 +50,8 @@ export interface AggregatedDataHistorical {
     _id: string;
     timestamp: string;
     totalStaked: {
-      matic: string;
-      usd: string;
+      matic?: string;
+      usd?: string;
     };
     apy?: undefined;
     apr?: undefined;

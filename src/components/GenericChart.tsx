@@ -48,12 +48,12 @@ const GenericChart: React.FC<{
           timestamp: '2022-01-01',
         },
       ];
-
+    console.log(historyByPlatform[platform].at(-1));
     return historyByPlatform[platform].map((item) => {
       return {
         ...item,
-        totalStaked: item.totalStaked.matic,
-        totalStakedUSD: item.totalStaked.usd,
+        totalStaked: item.totalStaked?.matic,
+        totalStakedUSD: item.totalStaked?.usd,
         apr: item?.apr,
         timestamp: Number((new Date(item.timestamp).getTime() / 1000).toFixed(0)),
       };

@@ -77,12 +77,14 @@ export default async function handler(request: NextApiRequest, response: NextApi
         }
       );
 
+      const doc = await collection.findOne({ _id: lastDocument._id });
+
       // response.setHeader('Cache-Control', 's-maxage=300');
-      response.status(200).json(result);
+      response.status(200).json(doc);
     } else {
-      await collection.insertOne(result);
+      const res = await collection.insertOne(result);
       // response.setHeader('Cache-Control', 's-maxage=300');
-      response.status(200).json(result);
+      response.status(200).json(res);
     }
   } catch (error) {
     response.status(500).json({ error: error });
