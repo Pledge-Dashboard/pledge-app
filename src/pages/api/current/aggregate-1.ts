@@ -7,7 +7,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
 
   const res = await (await fetch(`${COINGECKO_API_URI}/coins/matic-network`)).json();
 
-  if (!res?.market_data) {
+  if (!res?.market_data?.current_price?.usd) {
     response.send({
       error: 'Coingecko - No data found',
     });
