@@ -23,7 +23,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
     const ankrApiRes = await (await fetch(ANKR_API_URI)).json();
     const polygonData = ankrApiRes.services.find((service: any) => service.serviceName === 'polygon');
 
-    fetch(`${COINGECKO_API_URI}/coins/ankr-matic-reward-earning-bond`)
+    fetch(`${COINGECKO_API_URI}/coins/ankr-staked-matic`)
       .then((res) => res.json())
       .then((res) => {
         const currentPriceUSD = res?.market_data?.current_price?.usd;
