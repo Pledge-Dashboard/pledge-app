@@ -45,6 +45,13 @@ export default async function handler(request: NextApiRequest, response: NextApi
     });
   }
 
+  if (!tenderizeData) {
+    response.status(500);
+    response.send({
+      error: 'tenderize - No data found',
+    });
+  }
+
   const result = {
     tenderize: tenderizeData,
     timestamp: new Date().getTime(),

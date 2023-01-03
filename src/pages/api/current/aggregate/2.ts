@@ -24,6 +24,14 @@ export default async function handler(request: NextApiRequest, response: NextApi
     };
   }
 
+  if (!claystackData) {
+    response.status(500);
+    response.send({
+      error: 'Claystack - No data found',
+    });
+    return;
+  }
+
   const result = {
     claystack: claystackData,
     timestamp: new Date().getTime(),

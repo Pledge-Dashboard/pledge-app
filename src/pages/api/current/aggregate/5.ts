@@ -21,6 +21,14 @@ export default async function handler(request: NextApiRequest, response: NextApi
     };
   }
 
+  if (!staderData) {
+    response.status(500);
+    response.send({
+      error: 'Stader - No data found',
+    });
+    return;
+  }
+
   const result = {
     stader: staderData,
     timestamp: new Date().getTime(),

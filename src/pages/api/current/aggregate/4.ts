@@ -30,6 +30,14 @@ export default async function handler(request: NextApiRequest, response: NextApi
     };
   }
 
+  if (!lidoData) {
+    response.status(500);
+    response.send({
+      error: 'Lido - No data found',
+    });
+    return;
+  }
+
   const result = {
     lido: lidoData,
     timestamp: new Date().getTime(),

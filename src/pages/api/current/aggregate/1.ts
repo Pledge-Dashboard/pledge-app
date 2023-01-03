@@ -39,6 +39,15 @@ export default async function handler(request: NextApiRequest, response: NextApi
     });
   }
 
+  if (!ankrData) {
+    response.status(500);
+
+    response.send({
+      error: 'Ankr - No data found',
+    });
+    return;
+  }
+
   const result = {
     ankr: ankrData,
     timestamp: new Date().getTime(),
