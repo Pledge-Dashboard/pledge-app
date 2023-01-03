@@ -23,20 +23,19 @@ export default async function handler(request: NextApiRequest, response: NextApi
     const ankrApiRes = await (await fetch(ANKR_API_URI)).json();
     const polygonData = ankrApiRes.services.find((service: any) => service.serviceName === 'polygon');
 
-    fetch(`${COINGECKO_API_URI}/coins/ankr-reward-earning-matic`).then(async (res) => {
-      const result = await res.json();
-      const currentPriceUSD = result?.market_data?.current_price?.usd;
-      ankrData = {
-        priceMatic: currentPriceUSD / currentMaticPriceUSD, // price of ANKR token in MATIC
-        price: currentMaticPriceUSD / currentPriceUSD, // price of MATIC token in ANKR
-        apy: polygonData.apy.toString(),
-        stakers: polygonData.stakers.toString(),
-        totalStaked: {
-          matic: polygonData.totalStaked.toString(),
-          usd: polygonData.totalStakedUsd.toString(),
-        },
-      };
-    });
+    const res = await fetch(`${COINGECKO_API_URI}/coins/ankr-reward-earning-matic`);
+    const result = await res.json();
+    const currentPriceUSD = result?.market_data?.current_price?.usd;
+    ankrData = {
+      priceMatic: currentPriceUSD / currentMaticPriceUSD, // price of ANKR token in MATIC
+      price: currentMaticPriceUSD / currentPriceUSD, // price of MATIC token in ANKR
+      apy: polygonData.apy.toString(),
+      stakers: polygonData.stakers.toString(),
+      totalStaked: {
+        matic: polygonData.totalStaked.toString(),
+        usd: polygonData.totalStakedUsd.toString(),
+      },
+    };
   }
 
   if (!ankrData) {
