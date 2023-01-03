@@ -29,20 +29,19 @@ export default async function handler(request: NextApiRequest, response: NextApi
       matic: { tvl },
     } = await (await fetch(TENDERIZE_TVL_API_URI)).json();
 
-    fetch(`${COINGECKO_API_URI}/coins/tmatic`).then(async (res) => {
-      const result = await res.json();
-      const currentPriceUSD = result?.market_data?.current_price?.usd;
+    const res = await fetch(`${COINGECKO_API_URI}/coins/tmatic`);
+    const result = await res.json();
+    const currentPriceUSD = result?.market_data?.current_price?.usd;
 
-      tenderizeData = {
-        priceMatic: currentPriceUSD / currentMaticPriceUSD, // price of TMATIC token in MATIC
-        price: currentMaticPriceUSD / currentPriceUSD, // price of MATIC token in TMATIC
-        apy: apy.toString(),
-        totalStaked: {
-          usd: tvl.toString(),
-          matic: (tvl / currentMaticPriceUSD).toString(),
-        },
-      };
-    });
+    tenderizeData = {
+      priceMatic: currentPriceUSD / currentMaticPriceUSD, // price of TMATIC token in MATIC
+      price: currentMaticPriceUSD / currentPriceUSD, // price of MATIC token in TMATIC
+      apy: apy.toString(),
+      totalStaked: {
+        usd: tvl.toString(),
+        matic: (tvl / currentMaticPriceUSD).toString(),
+      },
+    };
   }
 
   if (!tenderizeData) {

@@ -11,13 +11,6 @@ export default async function handler(request: NextApiRequest, response: NextApi
     const lidoApiRes = await (await fetch(LIDO_API_URI)).json();
     const { price, apr, stakers, totalStaked } = lidoApiRes;
 
-    // const {
-    //   market_data: {
-    //     current_price: { usd: currentPriceUSD },
-    //   },
-    //   price_change_percentage_24h,
-    // } = await (await fetch(`${COINGECKO_API_URI}/coins/lido-staked-matic`)).json();
-
     lidoData = {
       priceMatic: 1 / price, // price of stMATIC token in MATIC
       price, // price of MATIC token in stMATIC
