@@ -68,7 +68,6 @@ export default async function handler(request: NextApiRequest, response: NextApi
         {
           $set: {
             tenderize: tenderizeData,
-            timestamp: new Date().getTime(),
           },
         }
       );

@@ -64,7 +64,6 @@ export default async function handler(request: NextApiRequest, response: NextApi
         {
           $set: {
             ankr: ankrData,
-            timestamp: new Date().getTime(),
           },
         }
       );
