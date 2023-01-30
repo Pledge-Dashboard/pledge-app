@@ -42,7 +42,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
   try {
     // search for last document. if within 24 hours, update it. else, insert new document
     const lastDocument = await collection.findOne({}, { sort: { timestamp: -1 } });
-    if (lastDocument && new Date().getTime() - lastDocument.timestamp < 86400000) {
+    if (lastDocument && new Date().getTime() - lastDocument.timestamp < 86300000) {
       await collection.updateOne(
         { _id: lastDocument._id },
         {
