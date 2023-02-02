@@ -66,7 +66,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
   try {
     // search for last document. if within 24 hours, update it. else, insert new document
     const lastDocument = await collection.findOne({}, { sort: { timestamp: -1 } });
-    if (lastDocument && new Date().getTime() - lastDocument.timestamp < 86300000) {
+    if (lastDocument && new Date().getTime() - lastDocument.timestamp < 85400000) {
       await collection.updateOne(
         { _id: lastDocument._id },
         {
@@ -77,12 +77,9 @@ export default async function handler(request: NextApiRequest, response: NextApi
       );
 
       const doc = await collection.findOne({ _id: lastDocument._id });
-
-      // response.setHeader('Cache-Control', 's-maxage=300');
       response.status(200).json(doc);
     } else {
       const res = await collection.insertOne({ result, timestamp: new Date().getTime() });
-      // response.setHeader('Cache-Control', 's-maxage=300');
       response.status(200).json(res);
     }
   } catch (error) {
