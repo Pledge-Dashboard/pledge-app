@@ -58,7 +58,6 @@ export default async function handler(request: NextApiRequest, response: NextApi
   const result = {
     lido: lidoData,
     stader: staderData,
-    timestamp: new Date().getTime(),
   };
 
   const { database }: { database: Db } = await connectToDatabase();
@@ -82,7 +81,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
       // response.setHeader('Cache-Control', 's-maxage=300');
       response.status(200).json(doc);
     } else {
-      const res = await collection.insertOne(result);
+      const res = await collection.insertOne({ result, timestamp: new Date().getTime() });
       // response.setHeader('Cache-Control', 's-maxage=300');
       response.status(200).json(res);
     }
