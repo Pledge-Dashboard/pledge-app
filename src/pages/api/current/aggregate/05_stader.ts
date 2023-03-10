@@ -6,7 +6,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
   let staderData;
   //   STADER DATA SYNC
   {
-    const STADER_TVL_API = 'https://staderverse.staderlabs.com/tvl';
+    const STADER_TVL_API = 'https://universe.staderlabs.com/common/tvl';
     const staderTvlApiRes = await (await fetch(STADER_TVL_API)).json();
     const { polygon } = staderTvlApiRes;
 
